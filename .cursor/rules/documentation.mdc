@@ -1,0 +1,7 @@
+---
+description: "documentation 작업에 공통 저장소 정책을 연결한다."
+globs: "**/*.md"
+alwaysApply: false
+---
+
+[AGENTS.md](../../AGENTS.md)를 먼저 읽고 [DOCUMENTATION_UPDATE_POLICY](../../docs/agent/DOCUMENTATION_UPDATE_POLICY.md)를 적용한다. 작업별 요구·실제 파일·이슈·실행 계획을 확인하고 정책을 여기로 복제하지 않는다. 자동 적용 범위가 불확실하면 링크 파일을 직접 읽는다.

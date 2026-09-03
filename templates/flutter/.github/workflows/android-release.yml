@@ -1,0 +1,50 @@
+name: android release candidate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Read the target project's exact SDK pin
+        id: sdk
+        shell: python
+        run: |
+          import json, os, re
+          from pathlib import Path
+          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
+              raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('version=' + version + '\n')
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: ${{ steps.sdk.outputs.version }}
+          channel: stable
+          cache: true
+      - run: dart run tool/bootstrap.dart
+      - run: dart run tool/verify.dart
+      - run: dart run tool/release_check.dart --platform android --candidate
+      - run: flutter build appbundle --release
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: android-candidate-${{ github.sha }}
+          path: build/app/outputs/bundle/release/*.aab
+          if-no-files-found: error
+          retention-days: 7

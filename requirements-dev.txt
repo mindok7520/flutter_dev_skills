@@ -1,0 +1,5 @@
+# Required only for validating this development-material repository.
+PyYAML==6.0.3
+# Parse CommonMark links, including reference links and optional titles.
+markdown-it-py==4.2.0
+mdurl==0.1.2

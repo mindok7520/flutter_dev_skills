@@ -1,0 +1,19 @@
+# Python validation environments and caches.
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+
+# Local task artifacts, credentials, and editor state.
+.local/
+artifacts/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.dart_tool/
+.flutter-plugins-dependencies
+build/

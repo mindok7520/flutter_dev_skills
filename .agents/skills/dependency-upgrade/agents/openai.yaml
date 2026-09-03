@@ -1,0 +1,4 @@
+interface:
+  display_name: "의존성 갱신"
+  short_description: "Flutter 의존성 갱신 작업의 조사·구현·검증·인계를 일관되게 수행"
+  default_prompt: "$dependency-upgrade 스킬로 현재 이슈의 의존성 갱신 작업을 수행해 주세요."

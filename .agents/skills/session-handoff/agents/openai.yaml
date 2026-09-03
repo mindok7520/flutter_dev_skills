@@ -1,0 +1,4 @@
+interface:
+  display_name: "세션 인계"
+  short_description: "Flutter 세션 인계 작업의 조사·구현·검증·인계를 일관되게 수행"
+  default_prompt: "$session-handoff 스킬로 현재 이슈의 세션 인계 작업을 수행해 주세요."

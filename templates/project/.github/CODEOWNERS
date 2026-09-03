@@ -1,0 +1,3 @@
+# Set real owners from the target repository before requiring code-owner review.
+# Use GitHub's CODEOWNERS syntax and verify that each owner has repository access.
+# This template intentionally grants no ownership to the source repository owner.

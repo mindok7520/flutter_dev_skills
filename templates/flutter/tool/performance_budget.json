@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "status": "proposed",
+  "profiles": {
+    "mobile-60hz": {
+      "startupP95": {"unit": "ms", "max": 2500},
+      "frameP95": {"unit": "ms", "max": 16.7},
+      "peakMemory": {"unit": "MiB", "max": 256}
+    },
+    "web": {
+      "startupP95": {"unit": "ms", "max": 4000},
+      "compressedTransfer": {"unit": "MiB", "max": 8}
+    }
+  }
+}

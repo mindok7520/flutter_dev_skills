@@ -1,0 +1,4 @@
+interface:
+  display_name: "장애·보안 사고 대응"
+  short_description: "Flutter 장애·보안 사고 대응 작업의 조사·구현·검증·인계를 일관되게 수행"
+  default_prompt: "$incident-response 스킬로 현재 이슈의 장애·보안 사고 대응 작업을 수행해 주세요."

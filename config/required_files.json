@@ -1,0 +1,1193 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "requested_path": "AGENTS.md",
+      "path": "AGENTS.md"
+    },
+    {
+      "requested_path": "CLAUDE.md",
+      "path": "CLAUDE.md"
+    },
+    {
+      "requested_path": "GEMINI.md",
+      "path": "GEMINI.md"
+    },
+    {
+      "requested_path": "README.md",
+      "path": "README.md"
+    },
+    {
+      "requested_path": "PROJECT.md",
+      "path": "PROJECT.md"
+    },
+    {
+      "requested_path": "ARCHITECTURE.md",
+      "path": "ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "CONTRIBUTING.md",
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "requested_path": "SECURITY.md",
+      "path": "SECURITY.md"
+    },
+    {
+      "requested_path": "CHANGELOG.md",
+      "path": "CHANGELOG.md"
+    },
+    {
+      "requested_path": "LICENSE",
+      "path": "LICENSE"
+    },
+    {
+      "requested_path": "pubspec.yaml",
+      "path": "templates/flutter/pubspec.yaml"
+    },
+    {
+      "requested_path": "analysis_options.yaml",
+      "path": "templates/flutter/analysis_options.yaml"
+    },
+    {
+      "requested_path": "l10n.yaml",
+      "path": "templates/flutter/l10n.yaml"
+    },
+    {
+      "requested_path": "dart_test.yaml",
+      "path": "templates/flutter/dart_test.yaml"
+    },
+    {
+      "requested_path": ".env.example",
+      "path": "templates/flutter/.env.example"
+    },
+    {
+      "requested_path": ".gitignore",
+      "path": ".gitignore"
+    },
+    {
+      "requested_path": ".fvmrc",
+      "path": "templates/flutter/.fvmrc"
+    },
+    {
+      "requested_path": "docs/README.md",
+      "path": "docs/README.md"
+    },
+    {
+      "requested_path": "docs/product/PRODUCT_VISION.md",
+      "path": "docs/product/PRODUCT_VISION.md"
+    },
+    {
+      "requested_path": "docs/product/REQUIREMENTS.md",
+      "path": "docs/product/REQUIREMENTS.md"
+    },
+    {
+      "requested_path": "docs/product/USER_PERSONAS.md",
+      "path": "docs/product/USER_PERSONAS.md"
+    },
+    {
+      "requested_path": "docs/product/USER_JOURNEYS.md",
+      "path": "docs/product/USER_JOURNEYS.md"
+    },
+    {
+      "requested_path": "docs/product/FEATURE_CATALOG.md",
+      "path": "docs/product/FEATURE_CATALOG.md"
+    },
+    {
+      "requested_path": "docs/product/NON_FUNCTIONAL_REQUIREMENTS.md",
+      "path": "docs/product/NON_FUNCTIONAL_REQUIREMENTS.md"
+    },
+    {
+      "requested_path": "docs/product/SUCCESS_METRICS.md",
+      "path": "docs/product/SUCCESS_METRICS.md"
+    },
+    {
+      "requested_path": "docs/architecture/OVERVIEW.md",
+      "path": "docs/architecture/OVERVIEW.md"
+    },
+    {
+      "requested_path": "docs/architecture/APP_ARCHITECTURE.md",
+      "path": "docs/architecture/APP_ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "docs/architecture/MODULE_STRUCTURE.md",
+      "path": "docs/architecture/MODULE_STRUCTURE.md"
+    },
+    {
+      "requested_path": "docs/architecture/DEPENDENCY_RULES.md",
+      "path": "docs/architecture/DEPENDENCY_RULES.md"
+    },
+    {
+      "requested_path": "docs/architecture/STATE_MANAGEMENT.md",
+      "path": "docs/architecture/STATE_MANAGEMENT.md"
+    },
+    {
+      "requested_path": "docs/architecture/DATA_FLOW.md",
+      "path": "docs/architecture/DATA_FLOW.md"
+    },
+    {
+      "requested_path": "docs/architecture/DOMAIN_LAYER.md",
+      "path": "docs/architecture/DOMAIN_LAYER.md"
+    },
+    {
+      "requested_path": "docs/architecture/REPOSITORY_PATTERN.md",
+      "path": "docs/architecture/REPOSITORY_PATTERN.md"
+    },
+    {
+      "requested_path": "docs/architecture/DEPENDENCY_INJECTION.md",
+      "path": "docs/architecture/DEPENDENCY_INJECTION.md"
+    },
+    {
+      "requested_path": "docs/architecture/NAVIGATION_ROUTING.md",
+      "path": "docs/architecture/NAVIGATION_ROUTING.md"
+    },
+    {
+      "requested_path": "docs/architecture/NETWORKING.md",
+      "path": "docs/architecture/NETWORKING.md"
+    },
+    {
+      "requested_path": "docs/architecture/LOCAL_STORAGE.md",
+      "path": "docs/architecture/LOCAL_STORAGE.md"
+    },
+    {
+      "requested_path": "docs/architecture/CACHE_STRATEGY.md",
+      "path": "docs/architecture/CACHE_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/architecture/OFFLINE_STRATEGY.md",
+      "path": "docs/architecture/OFFLINE_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/architecture/ERROR_HANDLING.md",
+      "path": "docs/architecture/ERROR_HANDLING.md"
+    },
+    {
+      "requested_path": "docs/architecture/FEATURE_FLAGS.md",
+      "path": "docs/architecture/FEATURE_FLAGS.md"
+    },
+    {
+      "requested_path": "docs/architecture/PLATFORM_ABSTRACTION.md",
+      "path": "docs/architecture/PLATFORM_ABSTRACTION.md"
+    },
+    {
+      "requested_path": "docs/architecture/WEB_ARCHITECTURE.md",
+      "path": "docs/architecture/WEB_ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "docs/architecture/NATIVE_INTEGRATION.md",
+      "path": "docs/architecture/NATIVE_INTEGRATION.md"
+    },
+    {
+      "requested_path": "docs/architecture/OBSERVABILITY.md",
+      "path": "docs/architecture/OBSERVABILITY.md"
+    },
+    {
+      "requested_path": "docs/adr/README.md",
+      "path": "docs/adr/README.md"
+    },
+    {
+      "requested_path": "docs/adr/ADR_TEMPLATE.md",
+      "path": "docs/adr/ADR_TEMPLATE.md"
+    },
+    {
+      "requested_path": "docs/engineering/DEVELOPMENT_PRINCIPLES.md",
+      "path": "docs/engineering/DEVELOPMENT_PRINCIPLES.md"
+    },
+    {
+      "requested_path": "docs/engineering/DART_FLUTTER_STYLE.md",
+      "path": "docs/engineering/DART_FLUTTER_STYLE.md"
+    },
+    {
+      "requested_path": "docs/engineering/CLEAN_CODE.md",
+      "path": "docs/engineering/CLEAN_CODE.md"
+    },
+    {
+      "requested_path": "docs/engineering/IMMUTABILITY.md",
+      "path": "docs/engineering/IMMUTABILITY.md"
+    },
+    {
+      "requested_path": "docs/engineering/NULL_SAFETY.md",
+      "path": "docs/engineering/NULL_SAFETY.md"
+    },
+    {
+      "requested_path": "docs/engineering/ASYNC_CONCURRENCY.md",
+      "path": "docs/engineering/ASYNC_CONCURRENCY.md"
+    },
+    {
+      "requested_path": "docs/engineering/ISOLATES.md",
+      "path": "docs/engineering/ISOLATES.md"
+    },
+    {
+      "requested_path": "docs/engineering/ERROR_POLICY.md",
+      "path": "docs/engineering/ERROR_POLICY.md"
+    },
+    {
+      "requested_path": "docs/engineering/LOGGING.md",
+      "path": "docs/engineering/LOGGING.md"
+    },
+    {
+      "requested_path": "docs/engineering/PACKAGE_POLICY.md",
+      "path": "docs/engineering/PACKAGE_POLICY.md"
+    },
+    {
+      "requested_path": "docs/engineering/DEPRECATION_POLICY.md",
+      "path": "docs/engineering/DEPRECATION_POLICY.md"
+    },
+    {
+      "requested_path": "docs/performance/PERFORMANCE_BUDGET.md",
+      "path": "docs/performance/PERFORMANCE_BUDGET.md"
+    },
+    {
+      "requested_path": "docs/performance/PERFORMANCE_GUIDE.md",
+      "path": "docs/performance/PERFORMANCE_GUIDE.md"
+    },
+    {
+      "requested_path": "docs/performance/MEMORY_GUIDE.md",
+      "path": "docs/performance/MEMORY_GUIDE.md"
+    },
+    {
+      "requested_path": "docs/performance/RENDERING_PERFORMANCE.md",
+      "path": "docs/performance/RENDERING_PERFORMANCE.md"
+    },
+    {
+      "requested_path": "docs/performance/REBUILD_OPTIMIZATION.md",
+      "path": "docs/performance/REBUILD_OPTIMIZATION.md"
+    },
+    {
+      "requested_path": "docs/performance/STARTUP_PERFORMANCE.md",
+      "path": "docs/performance/STARTUP_PERFORMANCE.md"
+    },
+    {
+      "requested_path": "docs/performance/NETWORK_PERFORMANCE.md",
+      "path": "docs/performance/NETWORK_PERFORMANCE.md"
+    },
+    {
+      "requested_path": "docs/performance/IMAGE_ASSET_OPTIMIZATION.md",
+      "path": "docs/performance/IMAGE_ASSET_OPTIMIZATION.md"
+    },
+    {
+      "requested_path": "docs/performance/WEB_PERFORMANCE.md",
+      "path": "docs/performance/WEB_PERFORMANCE.md"
+    },
+    {
+      "requested_path": "docs/performance/WASM_STRATEGY.md",
+      "path": "docs/performance/WASM_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/performance/BUILD_SIZE_BUDGET.md",
+      "path": "docs/performance/BUILD_SIZE_BUDGET.md"
+    },
+    {
+      "requested_path": "docs/performance/PROFILING_GUIDE.md",
+      "path": "docs/performance/PROFILING_GUIDE.md"
+    },
+    {
+      "requested_path": "docs/design/DESIGN_SYSTEM.md",
+      "path": "docs/design/DESIGN_SYSTEM.md"
+    },
+    {
+      "requested_path": "docs/design/DESIGN_TOKENS.md",
+      "path": "docs/design/DESIGN_TOKENS.md"
+    },
+    {
+      "requested_path": "docs/design/UI_GUIDELINES.md",
+      "path": "docs/design/UI_GUIDELINES.md"
+    },
+    {
+      "requested_path": "docs/design/UX_GUIDELINES.md",
+      "path": "docs/design/UX_GUIDELINES.md"
+    },
+    {
+      "requested_path": "docs/design/COMPONENT_GUIDELINES.md",
+      "path": "docs/design/COMPONENT_GUIDELINES.md"
+    },
+    {
+      "requested_path": "docs/design/RESPONSIVE_ADAPTIVE.md",
+      "path": "docs/design/RESPONSIVE_ADAPTIVE.md"
+    },
+    {
+      "requested_path": "docs/design/BREAKPOINTS.md",
+      "path": "docs/design/BREAKPOINTS.md"
+    },
+    {
+      "requested_path": "docs/design/ACCESSIBILITY.md",
+      "path": "docs/design/ACCESSIBILITY.md"
+    },
+    {
+      "requested_path": "docs/design/KEYBOARD_MOUSE_TOUCH.md",
+      "path": "docs/design/KEYBOARD_MOUSE_TOUCH.md"
+    },
+    {
+      "requested_path": "docs/design/ANIMATION_MOTION.md",
+      "path": "docs/design/ANIMATION_MOTION.md"
+    },
+    {
+      "requested_path": "docs/design/THEMING.md",
+      "path": "docs/design/THEMING.md"
+    },
+    {
+      "requested_path": "docs/design/DARK_MODE.md",
+      "path": "docs/design/DARK_MODE.md"
+    },
+    {
+      "requested_path": "docs/design/LOCALIZATION.md",
+      "path": "docs/design/LOCALIZATION.md"
+    },
+    {
+      "requested_path": "docs/security/SECURITY_ARCHITECTURE.md",
+      "path": "docs/security/SECURITY_ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "docs/security/THREAT_MODEL.md",
+      "path": "docs/security/THREAT_MODEL.md"
+    },
+    {
+      "requested_path": "docs/security/SECURE_CODING.md",
+      "path": "docs/security/SECURE_CODING.md"
+    },
+    {
+      "requested_path": "docs/security/AUTHENTICATION.md",
+      "path": "docs/security/AUTHENTICATION.md"
+    },
+    {
+      "requested_path": "docs/security/AUTHORIZATION.md",
+      "path": "docs/security/AUTHORIZATION.md"
+    },
+    {
+      "requested_path": "docs/security/SESSION_MANAGEMENT.md",
+      "path": "docs/security/SESSION_MANAGEMENT.md"
+    },
+    {
+      "requested_path": "docs/security/SECRET_MANAGEMENT.md",
+      "path": "docs/security/SECRET_MANAGEMENT.md"
+    },
+    {
+      "requested_path": "docs/security/DATA_CLASSIFICATION.md",
+      "path": "docs/security/DATA_CLASSIFICATION.md"
+    },
+    {
+      "requested_path": "docs/security/DATA_PROTECTION.md",
+      "path": "docs/security/DATA_PROTECTION.md"
+    },
+    {
+      "requested_path": "docs/security/CRYPTOGRAPHY.md",
+      "path": "docs/security/CRYPTOGRAPHY.md"
+    },
+    {
+      "requested_path": "docs/security/NETWORK_SECURITY.md",
+      "path": "docs/security/NETWORK_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/WEB_SECURITY.md",
+      "path": "docs/security/WEB_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/MOBILE_SECURITY.md",
+      "path": "docs/security/MOBILE_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/PLATFORM_STORAGE_SECURITY.md",
+      "path": "docs/security/PLATFORM_STORAGE_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/SUPPLY_CHAIN_SECURITY.md",
+      "path": "docs/security/SUPPLY_CHAIN_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/DEPENDENCY_SECURITY.md",
+      "path": "docs/security/DEPENDENCY_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/security/SECURITY_TESTING.md",
+      "path": "docs/security/SECURITY_TESTING.md"
+    },
+    {
+      "requested_path": "docs/security/INCIDENT_RESPONSE.md",
+      "path": "docs/security/INCIDENT_RESPONSE.md"
+    },
+    {
+      "requested_path": "docs/privacy/PRIVACY_ARCHITECTURE.md",
+      "path": "docs/privacy/PRIVACY_ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "docs/privacy/DATA_INVENTORY.md",
+      "path": "docs/privacy/DATA_INVENTORY.md"
+    },
+    {
+      "requested_path": "docs/privacy/DATA_RETENTION.md",
+      "path": "docs/privacy/DATA_RETENTION.md"
+    },
+    {
+      "requested_path": "docs/privacy/CONSENT_MANAGEMENT.md",
+      "path": "docs/privacy/CONSENT_MANAGEMENT.md"
+    },
+    {
+      "requested_path": "docs/privacy/TRACKING_POLICY.md",
+      "path": "docs/privacy/TRACKING_POLICY.md"
+    },
+    {
+      "requested_path": "docs/privacy/COMPLIANCE_CHECKLIST.md",
+      "path": "docs/privacy/COMPLIANCE_CHECKLIST.md"
+    },
+    {
+      "requested_path": "docs/monetization/MONETIZATION_ARCHITECTURE.md",
+      "path": "docs/monetization/MONETIZATION_ARCHITECTURE.md"
+    },
+    {
+      "requested_path": "docs/monetization/ADS.md",
+      "path": "docs/monetization/ADS.md"
+    },
+    {
+      "requested_path": "docs/monetization/AD_PLACEMENT_POLICY.md",
+      "path": "docs/monetization/AD_PLACEMENT_POLICY.md"
+    },
+    {
+      "requested_path": "docs/monetization/AD_PRIVACY_CONSENT.md",
+      "path": "docs/monetization/AD_PRIVACY_CONSENT.md"
+    },
+    {
+      "requested_path": "docs/monetization/PAYMENTS.md",
+      "path": "docs/monetization/PAYMENTS.md"
+    },
+    {
+      "requested_path": "docs/monetization/SUBSCRIPTIONS.md",
+      "path": "docs/monetization/SUBSCRIPTIONS.md"
+    },
+    {
+      "requested_path": "docs/monetization/ENTITLEMENTS.md",
+      "path": "docs/monetization/ENTITLEMENTS.md"
+    },
+    {
+      "requested_path": "docs/monetization/PURCHASE_RESTORATION.md",
+      "path": "docs/monetization/PURCHASE_RESTORATION.md"
+    },
+    {
+      "requested_path": "docs/monetization/RECEIPT_VERIFICATION.md",
+      "path": "docs/monetization/RECEIPT_VERIFICATION.md"
+    },
+    {
+      "requested_path": "docs/monetization/PAYMENT_SECURITY.md",
+      "path": "docs/monetization/PAYMENT_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/monetization/STORE_POLICY.md",
+      "path": "docs/monetization/STORE_POLICY.md"
+    },
+    {
+      "requested_path": "docs/monetization/MONETIZATION_TEST_MATRIX.md",
+      "path": "docs/monetization/MONETIZATION_TEST_MATRIX.md"
+    },
+    {
+      "requested_path": "docs/analytics/ANALYTICS_STRATEGY.md",
+      "path": "docs/analytics/ANALYTICS_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/analytics/EVENT_SCHEMA.md",
+      "path": "docs/analytics/EVENT_SCHEMA.md"
+    },
+    {
+      "requested_path": "docs/analytics/PERFORMANCE_METRICS.md",
+      "path": "docs/analytics/PERFORMANCE_METRICS.md"
+    },
+    {
+      "requested_path": "docs/analytics/CRASH_REPORTING.md",
+      "path": "docs/analytics/CRASH_REPORTING.md"
+    },
+    {
+      "requested_path": "docs/analytics/PRIVACY_SAFE_ANALYTICS.md",
+      "path": "docs/analytics/PRIVACY_SAFE_ANALYTICS.md"
+    },
+    {
+      "requested_path": "docs/testing/TEST_STRATEGY.md",
+      "path": "docs/testing/TEST_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/testing/TEST_PYRAMID.md",
+      "path": "docs/testing/TEST_PYRAMID.md"
+    },
+    {
+      "requested_path": "docs/testing/UNIT_TESTING.md",
+      "path": "docs/testing/UNIT_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/WIDGET_TESTING.md",
+      "path": "docs/testing/WIDGET_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/INTEGRATION_TESTING.md",
+      "path": "docs/testing/INTEGRATION_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/E2E_TESTING.md",
+      "path": "docs/testing/E2E_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/GOLDEN_TESTING.md",
+      "path": "docs/testing/GOLDEN_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/ACCESSIBILITY_TESTING.md",
+      "path": "docs/testing/ACCESSIBILITY_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/PERFORMANCE_TESTING.md",
+      "path": "docs/testing/PERFORMANCE_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/SECURITY_TESTING.md",
+      "path": "docs/testing/SECURITY_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/PAYMENT_TESTING.md",
+      "path": "docs/testing/PAYMENT_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/AD_TESTING.md",
+      "path": "docs/testing/AD_TESTING.md"
+    },
+    {
+      "requested_path": "docs/testing/CROSS_PLATFORM_MATRIX.md",
+      "path": "docs/testing/CROSS_PLATFORM_MATRIX.md"
+    },
+    {
+      "requested_path": "docs/testing/TEST_DATA_POLICY.md",
+      "path": "docs/testing/TEST_DATA_POLICY.md"
+    },
+    {
+      "requested_path": "docs/testing/QUALITY_GATES.md",
+      "path": "docs/testing/QUALITY_GATES.md"
+    },
+    {
+      "requested_path": "docs/workflow/DEVELOPMENT_WORKFLOW.md",
+      "path": "docs/workflow/DEVELOPMENT_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/GIT_WORKFLOW.md",
+      "path": "docs/workflow/GIT_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/BRANCHING_STRATEGY.md",
+      "path": "docs/workflow/BRANCHING_STRATEGY.md"
+    },
+    {
+      "requested_path": "docs/workflow/ISSUE_WORKFLOW.md",
+      "path": "docs/workflow/ISSUE_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/COMMIT_CONVENTION.md",
+      "path": "docs/workflow/COMMIT_CONVENTION.md"
+    },
+    {
+      "requested_path": "docs/workflow/PULL_REQUEST_WORKFLOW.md",
+      "path": "docs/workflow/PULL_REQUEST_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/CODE_REVIEW.md",
+      "path": "docs/workflow/CODE_REVIEW.md"
+    },
+    {
+      "requested_path": "docs/workflow/DEFINITION_OF_READY.md",
+      "path": "docs/workflow/DEFINITION_OF_READY.md"
+    },
+    {
+      "requested_path": "docs/workflow/DEFINITION_OF_DONE.md",
+      "path": "docs/workflow/DEFINITION_OF_DONE.md"
+    },
+    {
+      "requested_path": "docs/workflow/RELEASE_WORKFLOW.md",
+      "path": "docs/workflow/RELEASE_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/HOTFIX_WORKFLOW.md",
+      "path": "docs/workflow/HOTFIX_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/ROLLBACK_WORKFLOW.md",
+      "path": "docs/workflow/ROLLBACK_WORKFLOW.md"
+    },
+    {
+      "requested_path": "docs/workflow/VERSIONING.md",
+      "path": "docs/workflow/VERSIONING.md"
+    },
+    {
+      "requested_path": "docs/agent/README.md",
+      "path": "docs/agent/README.md"
+    },
+    {
+      "requested_path": "docs/agent/OPERATING_MODEL.md",
+      "path": "docs/agent/OPERATING_MODEL.md"
+    },
+    {
+      "requested_path": "docs/agent/SESSION_BOOTSTRAP.md",
+      "path": "docs/agent/SESSION_BOOTSTRAP.md"
+    },
+    {
+      "requested_path": "docs/agent/CONTEXT_RECOVERY.md",
+      "path": "docs/agent/CONTEXT_RECOVERY.md"
+    },
+    {
+      "requested_path": "docs/agent/CONTEXT_MANAGEMENT.md",
+      "path": "docs/agent/CONTEXT_MANAGEMENT.md"
+    },
+    {
+      "requested_path": "docs/agent/TASK_EXECUTION_PROTOCOL.md",
+      "path": "docs/agent/TASK_EXECUTION_PROTOCOL.md"
+    },
+    {
+      "requested_path": "docs/agent/TOOL_POLICY.md",
+      "path": "docs/agent/TOOL_POLICY.md"
+    },
+    {
+      "requested_path": "docs/agent/AUTONOMY_POLICY.md",
+      "path": "docs/agent/AUTONOMY_POLICY.md"
+    },
+    {
+      "requested_path": "docs/agent/VERIFICATION_PROTOCOL.md",
+      "path": "docs/agent/VERIFICATION_PROTOCOL.md"
+    },
+    {
+      "requested_path": "docs/agent/FAILURE_RECOVERY.md",
+      "path": "docs/agent/FAILURE_RECOVERY.md"
+    },
+    {
+      "requested_path": "docs/agent/HANDOFF_PROTOCOL.md",
+      "path": "docs/agent/HANDOFF_PROTOCOL.md"
+    },
+    {
+      "requested_path": "docs/agent/DOCUMENTATION_UPDATE_POLICY.md",
+      "path": "docs/agent/DOCUMENTATION_UPDATE_POLICY.md"
+    },
+    {
+      "requested_path": "docs/agent/AGENT_SECURITY.md",
+      "path": "docs/agent/AGENT_SECURITY.md"
+    },
+    {
+      "requested_path": "docs/exec-plans/README.md",
+      "path": "docs/exec-plans/README.md"
+    },
+    {
+      "requested_path": "docs/exec-plans/TEMPLATE.md",
+      "path": "docs/exec-plans/TEMPLATE.md"
+    },
+    {
+      "requested_path": "docs/release/RELEASE_CHECKLIST.md",
+      "path": "docs/release/RELEASE_CHECKLIST.md"
+    },
+    {
+      "requested_path": "docs/release/ANDROID_RELEASE.md",
+      "path": "docs/release/ANDROID_RELEASE.md"
+    },
+    {
+      "requested_path": "docs/release/IOS_RELEASE.md",
+      "path": "docs/release/IOS_RELEASE.md"
+    },
+    {
+      "requested_path": "docs/release/WEB_RELEASE.md",
+      "path": "docs/release/WEB_RELEASE.md"
+    },
+    {
+      "requested_path": "docs/release/STORE_SUBMISSION.md",
+      "path": "docs/release/STORE_SUBMISSION.md"
+    },
+    {
+      "requested_path": "docs/release/POST_RELEASE_CHECKLIST.md",
+      "path": "docs/release/POST_RELEASE_CHECKLIST.md"
+    },
+    {
+      "requested_path": "docs/operations/ENVIRONMENTS.md",
+      "path": "docs/operations/ENVIRONMENTS.md"
+    },
+    {
+      "requested_path": "docs/operations/CONFIGURATION.md",
+      "path": "docs/operations/CONFIGURATION.md"
+    },
+    {
+      "requested_path": "docs/operations/CI_CD.md",
+      "path": "docs/operations/CI_CD.md"
+    },
+    {
+      "requested_path": "docs/operations/OBSERVABILITY.md",
+      "path": "docs/operations/OBSERVABILITY.md"
+    },
+    {
+      "requested_path": "docs/operations/BACKUP_RECOVERY.md",
+      "path": "docs/operations/BACKUP_RECOVERY.md"
+    },
+    {
+      "requested_path": "docs/operations/DISASTER_RECOVERY.md",
+      "path": "docs/operations/DISASTER_RECOVERY.md"
+    },
+    {
+      "requested_path": "prompts/README.md",
+      "path": "prompts/README.md"
+    },
+    {
+      "requested_path": "prompts/00-session-bootstrap.md",
+      "path": "prompts/00-session-bootstrap.md"
+    },
+    {
+      "requested_path": "prompts/01-repository-analysis.md",
+      "path": "prompts/01-repository-analysis.md"
+    },
+    {
+      "requested_path": "prompts/02-requirements-analysis.md",
+      "path": "prompts/02-requirements-analysis.md"
+    },
+    {
+      "requested_path": "prompts/03-issue-triage.md",
+      "path": "prompts/03-issue-triage.md"
+    },
+    {
+      "requested_path": "prompts/04-plan-issue.md",
+      "path": "prompts/04-plan-issue.md"
+    },
+    {
+      "requested_path": "prompts/05-architecture-design.md",
+      "path": "prompts/05-architecture-design.md"
+    },
+    {
+      "requested_path": "prompts/06-architecture-review.md",
+      "path": "prompts/06-architecture-review.md"
+    },
+    {
+      "requested_path": "prompts/07-implement-feature.md",
+      "path": "prompts/07-implement-feature.md"
+    },
+    {
+      "requested_path": "prompts/08-fix-bug.md",
+      "path": "prompts/08-fix-bug.md"
+    },
+    {
+      "requested_path": "prompts/09-refactor.md",
+      "path": "prompts/09-refactor.md"
+    },
+    {
+      "requested_path": "prompts/10-code-review.md",
+      "path": "prompts/10-code-review.md"
+    },
+    {
+      "requested_path": "prompts/11-security-review.md",
+      "path": "prompts/11-security-review.md"
+    },
+    {
+      "requested_path": "prompts/12-threat-model.md",
+      "path": "prompts/12-threat-model.md"
+    },
+    {
+      "requested_path": "prompts/13-performance-audit.md",
+      "path": "prompts/13-performance-audit.md"
+    },
+    {
+      "requested_path": "prompts/14-memory-audit.md",
+      "path": "prompts/14-memory-audit.md"
+    },
+    {
+      "requested_path": "prompts/15-rendering-audit.md",
+      "path": "prompts/15-rendering-audit.md"
+    },
+    {
+      "requested_path": "prompts/16-concurrency-review.md",
+      "path": "prompts/16-concurrency-review.md"
+    },
+    {
+      "requested_path": "prompts/17-ui-review.md",
+      "path": "prompts/17-ui-review.md"
+    },
+    {
+      "requested_path": "prompts/18-ux-review.md",
+      "path": "prompts/18-ux-review.md"
+    },
+    {
+      "requested_path": "prompts/19-responsive-review.md",
+      "path": "prompts/19-responsive-review.md"
+    },
+    {
+      "requested_path": "prompts/20-accessibility-review.md",
+      "path": "prompts/20-accessibility-review.md"
+    },
+    {
+      "requested_path": "prompts/21-web-review.md",
+      "path": "prompts/21-web-review.md"
+    },
+    {
+      "requested_path": "prompts/22-wasm-review.md",
+      "path": "prompts/22-wasm-review.md"
+    },
+    {
+      "requested_path": "prompts/23-mobile-platform-review.md",
+      "path": "prompts/23-mobile-platform-review.md"
+    },
+    {
+      "requested_path": "prompts/24-package-evaluation.md",
+      "path": "prompts/24-package-evaluation.md"
+    },
+    {
+      "requested_path": "prompts/25-dependency-upgrade.md",
+      "path": "prompts/25-dependency-upgrade.md"
+    },
+    {
+      "requested_path": "prompts/26-test-plan.md",
+      "path": "prompts/26-test-plan.md"
+    },
+    {
+      "requested_path": "prompts/27-generate-tests.md",
+      "path": "prompts/27-generate-tests.md"
+    },
+    {
+      "requested_path": "prompts/28-integration-test.md",
+      "path": "prompts/28-integration-test.md"
+    },
+    {
+      "requested_path": "prompts/29-e2e-test.md",
+      "path": "prompts/29-e2e-test.md"
+    },
+    {
+      "requested_path": "prompts/30-performance-test.md",
+      "path": "prompts/30-performance-test.md"
+    },
+    {
+      "requested_path": "prompts/31-security-test.md",
+      "path": "prompts/31-security-test.md"
+    },
+    {
+      "requested_path": "prompts/32-payment-integration.md",
+      "path": "prompts/32-payment-integration.md"
+    },
+    {
+      "requested_path": "prompts/33-subscription-integration.md",
+      "path": "prompts/33-subscription-integration.md"
+    },
+    {
+      "requested_path": "prompts/34-ad-integration.md",
+      "path": "prompts/34-ad-integration.md"
+    },
+    {
+      "requested_path": "prompts/35-privacy-consent.md",
+      "path": "prompts/35-privacy-consent.md"
+    },
+    {
+      "requested_path": "prompts/36-analytics-instrumentation.md",
+      "path": "prompts/36-analytics-instrumentation.md"
+    },
+    {
+      "requested_path": "prompts/37-error-handling-review.md",
+      "path": "prompts/37-error-handling-review.md"
+    },
+    {
+      "requested_path": "prompts/38-api-contract-review.md",
+      "path": "prompts/38-api-contract-review.md"
+    },
+    {
+      "requested_path": "prompts/39-storage-review.md",
+      "path": "prompts/39-storage-review.md"
+    },
+    {
+      "requested_path": "prompts/40-build-size-audit.md",
+      "path": "prompts/40-build-size-audit.md"
+    },
+    {
+      "requested_path": "prompts/41-dead-code-review.md",
+      "path": "prompts/41-dead-code-review.md"
+    },
+    {
+      "requested_path": "prompts/42-localization-review.md",
+      "path": "prompts/42-localization-review.md"
+    },
+    {
+      "requested_path": "prompts/43-observability-review.md",
+      "path": "prompts/43-observability-review.md"
+    },
+    {
+      "requested_path": "prompts/44-pr-review.md",
+      "path": "prompts/44-pr-review.md"
+    },
+    {
+      "requested_path": "prompts/45-pr-description.md",
+      "path": "prompts/45-pr-description.md"
+    },
+    {
+      "requested_path": "prompts/46-release-readiness.md",
+      "path": "prompts/46-release-readiness.md"
+    },
+    {
+      "requested_path": "prompts/47-store-readiness.md",
+      "path": "prompts/47-store-readiness.md"
+    },
+    {
+      "requested_path": "prompts/48-release.md",
+      "path": "prompts/48-release.md"
+    },
+    {
+      "requested_path": "prompts/49-hotfix.md",
+      "path": "prompts/49-hotfix.md"
+    },
+    {
+      "requested_path": "prompts/50-rollback.md",
+      "path": "prompts/50-rollback.md"
+    },
+    {
+      "requested_path": "prompts/51-documentation-sync.md",
+      "path": "prompts/51-documentation-sync.md"
+    },
+    {
+      "requested_path": "prompts/52-session-handoff.md",
+      "path": "prompts/52-session-handoff.md"
+    },
+    {
+      "requested_path": "prompts/53-project-health-audit.md",
+      "path": "prompts/53-project-health-audit.md"
+    },
+    {
+      "requested_path": ".agents/skills/session-bootstrap/SKILL.md",
+      "path": ".agents/skills/session-bootstrap/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/issue-planning/SKILL.md",
+      "path": ".agents/skills/issue-planning/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/feature-development/SKILL.md",
+      "path": ".agents/skills/feature-development/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/bug-fix/SKILL.md",
+      "path": ".agents/skills/bug-fix/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/architecture/SKILL.md",
+      "path": ".agents/skills/architecture/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/flutter-development/SKILL.md",
+      "path": ".agents/skills/flutter-development/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/responsive-ui/SKILL.md",
+      "path": ".agents/skills/responsive-ui/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/accessibility/SKILL.md",
+      "path": ".agents/skills/accessibility/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/performance/SKILL.md",
+      "path": ".agents/skills/performance/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/memory/SKILL.md",
+      "path": ".agents/skills/memory/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/concurrency/SKILL.md",
+      "path": ".agents/skills/concurrency/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/security-review/SKILL.md",
+      "path": ".agents/skills/security-review/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/testing/SKILL.md",
+      "path": ".agents/skills/testing/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/web-wasm/SKILL.md",
+      "path": ".agents/skills/web-wasm/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/package-evaluation/SKILL.md",
+      "path": ".agents/skills/package-evaluation/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/payments/SKILL.md",
+      "path": ".agents/skills/payments/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/advertising/SKILL.md",
+      "path": ".agents/skills/advertising/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/privacy/SKILL.md",
+      "path": ".agents/skills/privacy/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/code-review/SKILL.md",
+      "path": ".agents/skills/code-review/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/dependency-upgrade/SKILL.md",
+      "path": ".agents/skills/dependency-upgrade/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/release/SKILL.md",
+      "path": ".agents/skills/release/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/incident-response/SKILL.md",
+      "path": ".agents/skills/incident-response/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/documentation-sync/SKILL.md",
+      "path": ".agents/skills/documentation-sync/SKILL.md"
+    },
+    {
+      "requested_path": ".agents/skills/session-handoff/SKILL.md",
+      "path": ".agents/skills/session-handoff/SKILL.md"
+    },
+    {
+      "requested_path": ".github/copilot-instructions.md",
+      "path": ".github/copilot-instructions.md"
+    },
+    {
+      "requested_path": ".github/CODEOWNERS",
+      "path": ".github/CODEOWNERS"
+    },
+    {
+      "requested_path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "requested_path": ".github/instructions/dart.instructions.md",
+      "path": ".github/instructions/dart.instructions.md"
+    },
+    {
+      "requested_path": ".github/instructions/flutter-ui.instructions.md",
+      "path": ".github/instructions/flutter-ui.instructions.md"
+    },
+    {
+      "requested_path": ".github/instructions/tests.instructions.md",
+      "path": ".github/instructions/tests.instructions.md"
+    },
+    {
+      "requested_path": ".github/instructions/security.instructions.md",
+      "path": ".github/instructions/security.instructions.md"
+    },
+    {
+      "requested_path": ".github/instructions/docs.instructions.md",
+      "path": ".github/instructions/docs.instructions.md"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/config.yml",
+      "path": ".github/ISSUE_TEMPLATE/config.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/feature.yml",
+      "path": ".github/ISSUE_TEMPLATE/feature.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "path": ".github/ISSUE_TEMPLATE/bug.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/refactor.yml",
+      "path": ".github/ISSUE_TEMPLATE/refactor.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/performance.yml",
+      "path": ".github/ISSUE_TEMPLATE/performance.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/technical-debt.yml",
+      "path": ".github/ISSUE_TEMPLATE/technical-debt.yml"
+    },
+    {
+      "requested_path": ".github/ISSUE_TEMPLATE/documentation.yml",
+      "path": ".github/ISSUE_TEMPLATE/documentation.yml"
+    },
+    {
+      "requested_path": ".github/workflows/pr-quality.yml",
+      "path": ".github/workflows/pr-quality.yml"
+    },
+    {
+      "requested_path": ".github/workflows/ci.yml",
+      "path": ".github/workflows/ci.yml"
+    },
+    {
+      "requested_path": ".github/workflows/dependency-audit.yml",
+      "path": ".github/workflows/dependency-audit.yml"
+    },
+    {
+      "requested_path": ".github/workflows/android-release.yml",
+      "path": "templates/flutter/.github/workflows/android-release.yml"
+    },
+    {
+      "requested_path": ".github/workflows/ios-release.yml",
+      "path": "templates/flutter/.github/workflows/ios-release.yml"
+    },
+    {
+      "requested_path": ".github/workflows/web-release.yml",
+      "path": "templates/flutter/.github/workflows/web-release.yml"
+    },
+    {
+      "requested_path": ".github/workflows/release.yml",
+      "path": "templates/flutter/.github/workflows/release.yml"
+    },
+    {
+      "requested_path": ".github/workflows/scheduled-health-check.yml",
+      "path": ".github/workflows/scheduled-health-check.yml"
+    },
+    {
+      "requested_path": ".cursor/rules/core.mdc",
+      "path": ".cursor/rules/core.mdc"
+    },
+    {
+      "requested_path": ".cursor/rules/flutter.mdc",
+      "path": ".cursor/rules/flutter.mdc"
+    },
+    {
+      "requested_path": ".cursor/rules/architecture.mdc",
+      "path": ".cursor/rules/architecture.mdc"
+    },
+    {
+      "requested_path": ".cursor/rules/testing.mdc",
+      "path": ".cursor/rules/testing.mdc"
+    },
+    {
+      "requested_path": ".cursor/rules/security.mdc",
+      "path": ".cursor/rules/security.mdc"
+    },
+    {
+      "requested_path": ".cursor/rules/documentation.mdc",
+      "path": ".cursor/rules/documentation.mdc"
+    },
+    {
+      "requested_path": "tool/bootstrap.dart",
+      "path": "templates/flutter/tool/bootstrap.dart"
+    },
+    {
+      "requested_path": "tool/check.dart",
+      "path": "templates/flutter/tool/check.dart"
+    },
+    {
+      "requested_path": "tool/verify.dart",
+      "path": "templates/flutter/tool/verify.dart"
+    },
+    {
+      "requested_path": "tool/analyze_dependencies.dart",
+      "path": "templates/flutter/tool/analyze_dependencies.dart"
+    },
+    {
+      "requested_path": "tool/performance_budget.dart",
+      "path": "templates/flutter/tool/performance_budget.dart"
+    },
+    {
+      "requested_path": "tool/release_check.dart",
+      "path": "templates/flutter/tool/release_check.dart"
+    },
+    {
+      "requested_path": "scripts/bootstrap.sh",
+      "path": "scripts/bootstrap.sh"
+    },
+    {
+      "requested_path": "scripts/bootstrap.ps1",
+      "path": "scripts/bootstrap.ps1"
+    },
+    {
+      "requested_path": "scripts/verify.sh",
+      "path": "scripts/verify.sh"
+    },
+    {
+      "requested_path": "scripts/verify.ps1",
+      "path": "scripts/verify.ps1"
+    }
+  ]
+}

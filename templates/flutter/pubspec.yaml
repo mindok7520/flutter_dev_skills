@@ -1,0 +1,27 @@
+# Merge selected entries into the target project's existing manifest.
+# Preserve its package name, version, supported SDK, and current dependencies.
+name: flutter_project_template
+description: Configuration reference for a separately created Flutter project.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.13.2 <4.0.0'
+  flutter: '>=3.47.2'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true

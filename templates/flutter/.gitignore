@@ -1,0 +1,17 @@
+# Merge these entries with the generated Flutter project's existing ignore file.
+.dart_tool/
+.fvm/
+build/
+coverage/
+lib/l10n/generated/
+.env
+.env.*
+!.env.example
+.local/
+artifacts/
+*.jks
+*.keystore
+*.p12
+*.p8
+*.mobileprovision
+key.properties

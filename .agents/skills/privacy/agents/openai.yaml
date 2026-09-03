@@ -1,0 +1,4 @@
+interface:
+  display_name: "개인정보 동의"
+  short_description: "Flutter 개인정보 동의 작업의 조사·구현·검증·인계를 일관되게 수행"
+  default_prompt: "$privacy 스킬로 현재 이슈의 개인정보 동의 작업을 수행해 주세요."

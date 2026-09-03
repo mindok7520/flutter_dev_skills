@@ -1,0 +1,65 @@
+name: Flutter health check
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Read the target project's exact SDK pin
+        id: sdk
+        shell: python
+        run: |
+          import json, os, re
+          from pathlib import Path
+          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
+              raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('version=' + version + '\n')
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: ${{ steps.sdk.outputs.version }}
+          channel: stable
+          cache: true
+      - run: dart run tool/bootstrap.dart
+      - run: dart run tool/verify.dart
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Read the target project's exact SDK pin
+        id: sdk
+        shell: python
+        run: |
+          import json, os, re
+          from pathlib import Path
+          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
+              raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('version=' + version + '\n')
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          flutter-version: ${{ steps.sdk.outputs.version }}
+          channel: stable
+          cache: true
+      - run: dart run tool/bootstrap.dart
+      - run: dart run tool/analyze_dependencies.dart --outdated --security

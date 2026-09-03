@@ -1,0 +1,37 @@
+name: 기술 부채
+description: 누적 위험의 영향과 해소 조건을 기록한다.
+title: '[technical-debt] '
+body:
+- type: markdown
+  attributes:
+    value: 비밀·개인정보·실거래 자료를 첨부하지 마세요. 사실·가정·미검증 항목을 구분해 작성하세요.
+- type: textarea
+  id: problem
+  attributes:
+    label: 현재 위험·발생 조건·유지 비용
+    description: 현재 상태와 근거를 구체적으로 기록하세요.
+  validations:
+    required: true
+- type: textarea
+  id: outcome
+  attributes:
+    label: 해소 방법·의존성·방치 비용
+  validations:
+    required: true
+- type: textarea
+  id: acceptance
+  attributes:
+    label: 수락 기준과 검증 방법
+    description: 관찰 가능한 완료 조건과 테스트·측정 명령을 적으세요.
+  validations:
+    required: true
+- type: textarea
+  id: scope
+  attributes:
+    label: 범위·제외 범위·플랫폼·의존성
+  validations:
+    required: true
+- type: textarea
+  id: risks
+  attributes:
+    label: 보안·데이터·성능 위험과 복구 방법

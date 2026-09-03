@@ -1,0 +1,4 @@
+interface:
+  display_name: "테스트 계획"
+  short_description: "Flutter 테스트 계획 작업의 조사·구현·검증·인계를 일관되게 수행"
+  default_prompt: "$testing 스킬로 현재 이슈의 테스트 계획 작업을 수행해 주세요."
