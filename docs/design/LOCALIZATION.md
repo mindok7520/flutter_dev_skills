@@ -1,35 +1,37 @@
-# 국제화·현지화
+# Localized UI and content
 
-## 목적과 적용 범위
+Treat translated text and cultural formatting as inputs to layout and interaction design.
 
-언어별 문구·서식·레이아웃 차이를 안전하게 처리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Product copy follows supported locales even when execution instructions are English.
+- Externalize user-visible strings and avoid concatenating fragments that break grammar, plural forms, or screen-reader output.
+- Verify Korean glyphs, fallback metrics, line wrapping, dates, numbers, currencies, and time zones in context.
+- Design for short, typical, and long content. Do not reduce all text to fit a fixed screenshot.
+- Support directional layout and traversal if right-to-left languages are in scope. Directional icons should be assessed by meaning.
+- Keep essential information accessible when truncation is used; errors and primary actions must remain understandable.
 
-- ARB와 flutter gen-l10n을 원본 흐름으로 사용한다
-- 문자열 연결 대신 매개변수·복수형 메시지를 쓴다
-- 날짜·금액·시간대는 목적에 맞게 포맷한다
+## Procedure
 
-## 실행 절차
+1. Confirm launch locales and inspect the app's localization toolchain.
+2. Use real localized examples and test expansion or pseudolocalization where supported.
+3. Inspect narrow layouts, large text, dialogs, forms, and data tables.
+4. Verify semantics, keyboard ordering, and recovery messages in the supported languages.
 
-1. lib/l10n의 언어 키와 설명을 맞춘다
-2. 긴 번역·RTL·폰트 누락·사용자 locale을 검토한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] No important action or error is clipped or replaced with unreadable small text.
+- [ ] Locale changes do not lose state or corrupt stored data.
+- [ ] Generated localization files and visible copy match the source strings.
 
-- [ ] 한국어·영어에서 주요 화면을 검증한다
-- [ ] 번역 키 누락과 하드코딩 문구가 없다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A translation review and a layout review catch different defects. Machine translation alone does not prove product terminology is appropriate; record unreviewed languages explicitly.
 
-자동 번역은 결제·동의 문구의 법적·사용성 검토를 대신하지 않는다. 미지원 언어의 fallback을 정의한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter internationalization](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization) and [Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

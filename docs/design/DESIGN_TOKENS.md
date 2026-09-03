@@ -1,35 +1,37 @@
-# 디자인 토큰
+# Design tokens and typography
 
-## 목적과 적용 범위
+Make visual decisions explicit, reusable, and adaptable to themes and content.
 
-시각 값을 이름 있는 설계 규칙으로 관리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Use semantic color names for background, surface, foreground emphasis, primary action, focus, error, warning, and success. Do not encode meaning only in hue.
+- Define title, body, label, caption, and data roles with size, weight, line height, and locale-appropriate fallback. A font family is not universally good or bad.
+- Use a compact spacing scale; 4, 8, 12, 16, 24, and 32 logical pixels are a starting example, not a mandatory platform standard.
+- Separate visual icon size from the interactive hit region. Define shape and elevation only where their hierarchy is meaningful.
+- Map tokens to the existing theme and typed extensions where suitable; avoid scattered literals and duplicated parallel theme systems.
+- Record light/dark/high-contrast intent, text scaling behavior, and motion roles. Avoid locking text to a fixed scale to preserve a screenshot.
 
-- 간격 기본 척도는 4·8·12·16·24·32 논리 픽셀이다
-- 색은 의미 역할로 참조하고 상태를 색만으로 구분하지 않는다
-- 터치 영역과 시각 크기를 분리할 수 있다
+## Procedure
 
-## 실행 절차
+1. Inspect the current theme, fonts, component defaults, and repeated literals.
+2. Choose the smallest semantic vocabulary that serves the approved screen and its states.
+3. Check the actual foreground/background pairs, localized glyphs, and long content.
+4. Apply tokens through real components and recapture representative themes and large text.
 
-1. 대상 앱에 정의한 토큰과 ThemeData를 확인한다
-2. 새 값의 목적과 기존 값으로 해결되지 않는 이유를 기록한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Every new shared value has a reason and no conflicting duplicate source.
+- [ ] Both themes preserve emphasis, contrast, and non-color state cues.
+- [ ] Korean and other supported scripts render with readable metrics and predictable fallback.
 
-- [ ] 화면에 임의의 색·간격이 반복되지 않는다
-- [ ] 테마 전환 후 대비와 포커스 표시가 유지된다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A mathematically regular scale still needs optical adjustment. Record small exceptions when a real glyph, icon, or platform control requires them; do not create a new token for each isolated pixel adjustment.
 
-토큰 수가 많으면 사용이 어려워진다. 플랫폼별 예외는 근거를 붙이고 안정된 의미 이름을 사용한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md). [Wonderous styling source](https://github.com/gskinnerTeam/flutter-wonderous-app).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

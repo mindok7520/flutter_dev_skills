@@ -1,35 +1,35 @@
-# 저장소 패턴
+# Repository responsibilities
 
-## 목적과 적용 범위
+Give application code a consistent data contract across remote, local, cached, and test implementations.
 
-데이터 소스와 앱이 믿는 현재 상태를 분리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Put data coordination, mapping, caching rules, and consistency boundaries in repositories when those responsibilities exist.
+- Keep transport parsing and low-level platform access in services or adapters. Do not return raw transport exceptions as user-facing text.
+- Define source precedence, freshness, invalidation, account scoping, and offline reconciliation explicitly.
+- Keep an injectable fake or test implementation at a useful boundary; a fake should reproduce the contract, not just happy-path data.
 
-- 저장소가 캐시·새로고침·오류 변환·세션 경계를 소유한다
-- 저장소끼리 순환 호출하지 않는다
-- 계정 전환 시 이전 계정 데이터와 구독을 비운다
+## Procedure
 
-## 실행 절차
+1. Identify the user-visible data promise and external failure modes.
+2. Define inputs, outputs, errors, cancellation expectations, and cache behavior.
+3. Test refresh, offline, stale data, duplicate mutation, and account isolation where relevant.
+4. Verify that presentation consumes the contract without knowing transport details.
 
-1. 계약에 일관성·신선도·오프라인 동작을 명시한다
-2. 원격·로컬 서비스와 테스트 대역을 생성자로 주입한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Cache and server disagreement has a documented reconciliation path.
+- [ ] Errors and cancellations preserve data integrity.
+- [ ] Tests isolate external I/O without asserting internal call sequences unnecessarily.
 
-- [ ] 동일 요청 합치기·캐시 만료·계정 전환을 검사한다
-- [ ] 쓰기 실패 후 UI와 캐시가 모순되지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A trivial local value may not need a repository layer. Add the pattern to manage a real data boundary, not to satisfy a folder diagram.
 
-전역 캐시는 쉽지만 사용자 간 데이터 혼합 위험이 있다. 키에 사용자 범위를 포함하고 수명 경계를 테스트한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter architecture recommendations](https://docs.flutter.dev/app-architecture/recommendations), [Compass example](https://github.com/flutter/samples/tree/main/compass_app), and [state management](STATE_MANAGEMENT.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

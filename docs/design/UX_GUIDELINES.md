@@ -1,35 +1,40 @@
-# 사용 경험 원칙
+# User experience and task flows
 
-## 목적과 적용 범위
+Design the complete route from user intent to a recoverable outcome, including interruptions and mistakes.
 
-사용자가 자신의 작업과 시스템 상태를 이해하도록 한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Consult the user about the target task and success criteria before an unscoped UX redesign.
+- Make system status visible promptly. Distinguish a pending request, background refresh, confirmed save, and failure.
+- Use familiar language and consistent action names. Recognizing options should be easier than remembering undocumented steps.
+- Reveal complexity as needed while keeping essential information discoverable. A shorter screen is not useful if it hides a required step.
+- Prevent foreseeable mistakes through constraints and clear labels. Explain what failed and how to recover near the relevant control.
+- Preserve form values, selection, scroll position, and navigation context when appropriate. Define unsaved-change behavior.
+- Use confirmation or undo in proportion to consequence and reversibility. Do not ask for confirmation on every harmless action.
+- Make consent and cancellation understandable. Never hide rejection, preselect paid consent, or disguise advertising as a primary action.
 
-- 복구 가능한 오류는 다음 행동을 제공한다
-- 삭제·결제 등 중요한 행동은 결과를 명확히 알린다
-- 강압적 동의·숨은 취소·의도하지 않은 광고 클릭을 피한다
+## Procedure
 
-## 실행 절차
+1. Map entry, main task, success, cancellation, interruption, and retry with the user.
+2. Identify prerequisites, permission requests, data availability, and offline behavior.
+3. Write the shortest meaningful successful walkthrough and a likely recovery path.
+4. Exercise the flow as a first-time user with representative content and an assistive/input mode where relevant.
+5. Prioritize blocked tasks and lost work before cosmetic friction; validate the correction in the same flow.
 
-1. 사용자의 목표와 화면 간 전환을 관찰한다
-2. 되돌리기·저장 상태·진행 중 작업·네트워크 실패를 설계한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] A user can complete the task and understand the outcome without undocumented knowledge.
+- [ ] Cancellation and failure do not trap the user or silently discard recoverable work.
+- [ ] Observed usability findings are separated from assumptions and optional preferences.
 
-- [ ] 처음 쓰는 사용자가 핵심 작업을 완료한다
-- [ ] 취소·뒤로가기·접근성 경로가 막히지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A developer walkthrough is useful evidence but does not replace research with representative users. Record the participant and context when claiming observed usability; otherwise label the assessment as an expert review.
 
-보호 확인을 모든 행동에 붙이면 피로가 생긴다. 위험과 되돌릴 수 있는 정도에 맞춰 확인을 선택한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

@@ -1,35 +1,38 @@
-# 접근성 기준
+# Accessible interaction and presentation
 
-## 목적과 적용 범위
+Make the core task usable with assistive technology, different input methods, and visual or motor constraints.
 
-보조 기술·운동·시각 제약이 있어도 핵심 작업을 완료하게 한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Use WCAG 2.2 AA as a web accessibility reference, while checking applicable platform guidance and product obligations separately.
+- Check text contrast against actual backgrounds: generally 4.5:1 for normal text and 3:1 for qualifying large text. Essential non-text controls and focus cues generally need 3:1; understand the criterion exceptions.
+- Use appropriately sized touch regions. Android 48 logical pixels and iOS 44 points are common platform targets; WCAG 2.2 web target sizing is a different criterion with spacing and other exceptions.
+- Give controls accessible names, roles, values, states, and predictable traversal. Exclude purely decorative content and avoid duplicate announcements.
+- Support text enlargement, localized content, keyboard-only use, and visible unobscured focus. Do not encode success, error, or selection only with color.
+- Provide alternatives to drag-only or gesture-only actions when needed. Respect reduced motion and avoid flashes or animation that prevents interaction.
+- Explain errors in context and announce important asynchronous changes without flooding the accessibility tree.
 
-- WCAG 2.2 AA를 제품 검토 기준으로 삼는다
-- 텍스트 대비·포커스·의미 레이블·오류 안내를 검증한다
-- 색·모션·제스처 하나에만 의미를 의존하지 않는다
+## Procedure
 
-## 실행 절차
+1. Identify the target flow, platforms, input modes, and accessibility expectations with the user.
+2. Run available semantics, contrast, and target-size checks in the target app.
+3. Complete the flow with keyboard and the relevant native screen reader; inspect focus after dialogs, navigation, and errors.
+4. Test large text, long translations, reduced motion, and state changes using actual rendered screens.
 
-1. Semantics와 기본 접근 가능한 위젯을 사용한다
-2. TalkBack·VoiceOver·키보드·큰 글자·고대비에서 주요 흐름을 수행한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] The main task works with the relevant assistive/input modes and documented environments.
+- [ ] Errors and dynamic updates have useful, nonduplicated announcements.
+- [ ] Automatic checks and manual observations are recorded separately.
 
-- [ ] 터치 대상과 이름 없는 아이콘을 자동 검사한다
-- [ ] 수동 보조 기술 테스트 결과를 기록한다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Automated tests cover only a subset of accessibility. A pass is not a claim of legal compliance or suitability for every disability. Prefer a clear, tested interaction over decorative novelty that requires additional explanation.
 
-자동 테스트 통과만으로 접근성 준수를 선언하지 않는다. 실제 탐색 순서와 사용자 이해를 수동 확인한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter accessibility](https://docs.flutter.dev/ui/accessibility-and-internationalization/accessibility), [WCAG 2.2 quick reference](https://www.w3.org/WAI/WCAG22/quickref/), and [Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

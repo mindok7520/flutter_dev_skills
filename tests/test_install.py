@@ -21,6 +21,12 @@ class InstallTests(unittest.TestCase):
         destinations = {entry.destination.relative_to(self.target).as_posix() for entry in plan}
         self.assertIn('AGENTS.md', destinations)
         self.assertIn('PROJECT.md', destinations)
+        self.assertIn('docs/design/DESIGN_WORKFLOW.md', destinations)
+        self.assertIn('docs/performance/SHADER_GUIDE.md', destinations)
+        self.assertIn('.agents/skills/ui-design/agents/openai.yaml', destinations)
+        self.assertIn('.agents/skills/shaders/SKILL.md', destinations)
+        self.assertIn('prompts/61-component-catalog.md', destinations)
+        self.assertIn('docs/references/repositories.json', destinations)
         self.assertNotIn('pubspec.yaml', destinations)
         self.assertNotIn('LICENSE', destinations)
         self.assertNotIn('.github/workflows/ci.yml', destinations)
@@ -79,6 +85,7 @@ class InstallTests(unittest.TestCase):
         for path in self.target.rglob('*.md'):
             errors.extend(local_link_errors(path, self.target))
         self.assertEqual(errors, [])
+        self.assertFalse((self.target / 'config/workflow_catalog.json').exists())
 
     def test_incomplete_source_aborts_before_copying(self):
         original = Path.is_file

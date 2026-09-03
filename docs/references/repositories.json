@@ -1,0 +1,285 @@
+{
+  "checked_at": "2026-09-03",
+  "repositories": [
+    {
+      "repository": "anthropics/skills",
+      "sha": "53048666b05b4799081517d00e09e0a2dd688678",
+      "commit_date": "2026-09-01T18:30:38Z",
+      "checked_at": "2026-09-03",
+      "license": "NOASSERTION",
+      "archived": false,
+      "files": [
+        {
+          "path": "skills/frontend-design/SKILL.md",
+          "url": "https://github.com/anthropics/skills/blob/53048666b05b4799081517d00e09e0a2dd688678/skills/frontend-design/SKILL.md"
+        },
+        {
+          "path": "skills/frontend-design/LICENSE.txt",
+          "url": "https://github.com/anthropics/skills/blob/53048666b05b4799081517d00e09e0a2dd688678/skills/frontend-design/LICENSE.txt"
+        }
+      ],
+      "focus_ko": "디자인 방향·실제 문구·색과 글꼴 역할·비평",
+      "adaptation_ko": "제품 맥락과 명시적 시각 방향, 구현 전 계획과 구현 후 화면 검토를 참고한다. 특정 색·폰트의 일괄 금지나 모든 제품에 강한 장식을 요구하는 규칙은 적용하지 않는다."
+    },
+    {
+      "repository": "felangel/bloc",
+      "sha": "8fcf54dfea7ba51ef04c091d1a27e0da498b29f0",
+      "commit_date": "2026-08-10T16:40:08Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/felangel/bloc/blob/8fcf54dfea7ba51ef04c091d1a27e0da498b29f0/README.md"
+        },
+        {
+          "path": "packages/bloc_concurrency/README.md",
+          "url": "https://github.com/felangel/bloc/blob/8fcf54dfea7ba51ef04c091d1a27e0da498b29f0/packages/bloc_concurrency/README.md"
+        }
+      ],
+      "focus_ko": "명시적 상태 전이와 이벤트 처리 정책",
+      "adaptation_ko": "동시·순차·중복 무시·최신 요청 우선의 의미를 작업별로 비교한다. 핸들러 취소가 서버 변경을 되돌리거나 한 이벤트의 직렬화가 전체 이벤트를 직렬화한다고 가정하지 않는다."
+    },
+    {
+      "repository": "flutter/devtools",
+      "sha": "c9c5bc8e936a3f8521c2296604778c8ca49a9ade",
+      "commit_date": "2026-09-01T17:08:49Z",
+      "checked_at": "2026-09-03",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/flutter/devtools/blob/c9c5bc8e936a3f8521c2296604778c8ca49a9ade/README.md"
+        },
+        {
+          "path": "packages/devtools_app/README.md",
+          "url": "https://github.com/flutter/devtools/blob/c9c5bc8e936a3f8521c2296604778c8ca49a9ade/packages/devtools_app/README.md"
+        }
+      ],
+      "focus_ko": "프로파일링·메모리·프레임 증거",
+      "adaptation_ko": "원본 측정, 실행 환경, 비용 위치를 확인하는 절차를 반영한다. 도구 설치나 한 번의 수치 확인을 성능 개선 완료로 간주하지 않는다."
+    },
+    {
+      "repository": "flutter/samples",
+      "sha": "463e365e4842f252ffab9c6198594a504d69469f",
+      "commit_date": "2026-08-27T14:57:12Z",
+      "checked_at": "2026-09-03",
+      "license": "NOASSERTION",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/flutter/samples/blob/463e365e4842f252ffab9c6198594a504d69469f/README.md"
+        },
+        {
+          "path": "compass_app/README.md",
+          "url": "https://github.com/flutter/samples/blob/463e365e4842f252ffab9c6198594a504d69469f/compass_app/README.md"
+        }
+      ],
+      "focus_ko": "Compass의 제품 규모 설계 사례",
+      "adaptation_ko": "공식 설계 설명과 함께 역할 경계, 데이터와 UI 분리, 테스트 가능한 외부 경계를 참고한다. 샘플 앱을 현재 자료 저장소에 복사하거나 예제의 패키지 구성을 모든 제품에 강제하지 않는다."
+    },
+    {
+      "repository": "gskinner/flutter_animate",
+      "sha": "62c12040b1e3f80403b4fbfa48649155df006eb5",
+      "commit_date": "2024-11-25T19:37:37Z",
+      "checked_at": "2026-09-03",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/gskinner/flutter_animate/blob/62c12040b1e3f80403b4fbfa48649155df006eb5/README.md"
+        }
+      ],
+      "focus_ko": "효과 조합·타임라인·컨트롤러",
+      "adaptation_ko": "병렬 효과와 순서 구성, 컨트롤러·어댑터 선택을 구분한다. 편리한 애니메이션 문법을 성능 우위의 근거로 삼지 않는다."
+    },
+    {
+      "repository": "gskinnerTeam/flutter-wonderous-app",
+      "sha": "747b945a7e5239356bf2664261aa2f3b020b8898",
+      "commit_date": "2026-07-30T15:48:12Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/gskinnerTeam/flutter-wonderous-app/blob/747b945a7e5239356bf2664261aa2f3b020b8898/README.md"
+        },
+        {
+          "path": "lib/styles/styles.dart",
+          "url": "https://github.com/gskinnerTeam/flutter-wonderous-app/blob/747b945a7e5239356bf2664261aa2f3b020b8898/lib/styles/styles.dart"
+        }
+      ],
+      "focus_ko": "브랜드 표현·글꼴 역할·간격·모션 사례",
+      "adaptation_ko": "실제 스타일 파일의 역할 분리와 제품별 시각 표현을 참고한다. 예제의 최소 화면 크기, 글로벌 접근 방식, 모든 효과를 베이스의 필수 규칙으로 복사하지 않는다."
+    },
+    {
+      "repository": "jonahwilliams/flutter_shaders",
+      "sha": "9d99a2ff207a3ce3552a6bffd724402bd3a3e05f",
+      "commit_date": "2024-06-20T17:32:10Z",
+      "checked_at": "2026-09-03",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/jonahwilliams/flutter_shaders/blob/9d99a2ff207a3ce3552a6bffd724402bd3a3e05f/README.md"
+        }
+      ],
+      "focus_ko": "셰이더 자산·샘플러·uniform 계약",
+      "adaptation_ko": "픽셀 효과의 입력, 샘플링 영역, 샘플러와 숫자 입력의 계약을 참고한다. GPU 효과가 항상 빠르다고 가정하지 않으며 미지원 환경의 대체 표현을 요구한다."
+    },
+    {
+      "repository": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sha": "58c220ff9d02be80523b06c03471925c52e8ab5d",
+      "commit_date": "2026-09-02T10:45:32Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/58c220ff9d02be80523b06c03471925c52e8ab5d/README.md"
+        },
+        {
+          "path": ".claude/skills/ui-ux-pro-max/SKILL.md",
+          "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/58c220ff9d02be80523b06c03471925c52e8ab5d/.claude/skills/ui-ux-pro-max/SKILL.md"
+        }
+      ],
+      "focus_ko": "제품·사용자·스타일 맥락과 디자인 시스템 기록",
+      "adaptation_ko": "사용자 맥락 및 실제 스택 확인, 공통 규칙과 화면별 예외의 분리를 참고한다. 검색 결과를 정답으로 취급하거나 패키지 설치·외부 코드 실행을 자동 수행하지 않는다."
+    },
+    {
+      "repository": "obra/superpowers",
+      "sha": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+      "commit_date": "2026-08-12T16:53:21Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/README.md"
+        },
+        {
+          "path": "skills/brainstorming/SKILL.md",
+          "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/brainstorming/SKILL.md"
+        },
+        {
+          "path": "skills/writing-plans/SKILL.md",
+          "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/writing-plans/SKILL.md"
+        },
+        {
+          "path": "skills/verification-before-completion/SKILL.md",
+          "url": "https://github.com/obra/superpowers/blob/b36e0829c6d0140e93cfef2ca599b1b07d4a7797/skills/verification-before-completion/SKILL.md"
+        }
+      ],
+      "focus_ko": "질문·설계 합의·실행 계획·완료 증거",
+      "adaptation_ko": "질문을 통한 요구 정리, 범위에 맞는 설계 기록, 검증 근거를 적용한다. 모든 작업의 반복 승인, 무조건적인 하위 에이전트 실행, 모든 변경에 대한 동일한 테스트 절차는 그대로 도입하지 않는다."
+    },
+    {
+      "repository": "rive-app/rive-flutter",
+      "sha": "9bb8f7f4a06db6c1472eb073eb39837ea2a81a86",
+      "commit_date": "2026-08-24T19:11:14Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/rive-app/rive-flutter/blob/9bb8f7f4a06db6c1472eb073eb39837ea2a81a86/README.md"
+        }
+      ],
+      "focus_ko": "상태를 가진 그래픽·렌더러·리소스 수명",
+      "adaptation_ko": "인터랙티브 에셋이 필요한 경우의 후보로 다루고 실제 런타임 버전과 해제 책임을 확인한다. 오래된 README의 플래그를 현재 SDK에 무조건 적용하지 않으며 애니메이션 상태를 결제·권한 상태의 근거로 쓰지 않는다."
+    },
+    {
+      "repository": "rrousselGit/riverpod",
+      "sha": "693a2dbc59db145f1258449dfea8f417810a2404",
+      "commit_date": "2026-08-31T16:14:07Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/rrousselGit/riverpod/blob/693a2dbc59db145f1258449dfea8f417810a2404/README.md"
+        },
+        {
+          "path": "website/docs/concepts2/auto_dispose.mdx",
+          "url": "https://github.com/rrousselGit/riverpod/blob/693a2dbc59db145f1258449dfea8f417810a2404/website/docs/concepts2/auto_dispose.mdx"
+        }
+      ],
+      "focus_ko": "상태 범위·자동 해제·캐시·정리",
+      "adaptation_ko": "상태 소유권과 수명, 무효화, 정리 훅, 캐시 상한을 검토한다. 자동 해제를 외부 요청 취소의 증거로 보거나 기존 상태관리의 무조건적 교체를 요구하지 않는다."
+    },
+    {
+      "repository": "shadcn-ui/ui",
+      "sha": "71e50952fbb7eda2c992660d36cd58671a2edf42",
+      "commit_date": "2026-09-02T16:33:01Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/shadcn-ui/ui/blob/71e50952fbb7eda2c992660d36cd58671a2edf42/README.md"
+        }
+      ],
+      "focus_ko": "일관된 컴포넌트 조합과 실제 소스 활용",
+      "adaptation_ko": "AI가 실제 컴포넌트와 사용 예제를 읽고 기존 규칙으로 조합하도록 한다. 웹 컴포넌트나 React 상태관리 코드를 Flutter 프로젝트에 이식하지 않는다."
+    },
+    {
+      "repository": "vercel-labs/agent-skills",
+      "sha": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "commit_date": "2026-08-28T13:36:07Z",
+      "checked_at": "2026-09-03",
+      "license": "NOASSERTION",
+      "archived": false,
+      "files": [
+        {
+          "path": "skills/web-design-guidelines/SKILL.md",
+          "url": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/web-design-guidelines/SKILL.md"
+        }
+      ],
+      "focus_ko": "AI가 참고할 검토 기준 연결",
+      "adaptation_ko": "작업 범위와 관련 기준을 읽고 근거가 있는 발견을 보고하는 구조를 참고한다. 외부 문서가 사용자 지시보다 우선하거나 자동으로 추가 권한을 부여하지 않는다."
+    },
+    {
+      "repository": "vercel-labs/web-interface-guidelines",
+      "sha": "e3d624baaf29dc1fc645aff3e38f03e564d2d6b1",
+      "commit_date": "2026-08-18T00:21:06Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "command.md",
+          "url": "https://github.com/vercel-labs/web-interface-guidelines/blob/e3d624baaf29dc1fc645aff3e38f03e564d2d6b1/command.md"
+        }
+      ],
+      "focus_ko": "접근성·포커스·입력·문구·실패 상태",
+      "adaptation_ko": "의미 있는 이름, 입력 보존, 포커스, 긴 콘텐츠, 모션 감소를 Flutter의 의미 정보와 입력 체계에 맞게 반영한다. DOM·ARIA·CSS 전용 구현, 고정된 목록 길이 기준, 애니메이션 속성 규칙을 Flutter에 그대로 복제하지 않는다."
+    },
+    {
+      "repository": "widgetbook/widgetbook",
+      "sha": "66c1eb2f002aab2c90cceddff9f7a84db1959dc2",
+      "commit_date": "2026-06-25T08:28:37Z",
+      "checked_at": "2026-09-03",
+      "license": "MIT",
+      "archived": false,
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/widgetbook/widgetbook/blob/66c1eb2f002aab2c90cceddff9f7a84db1959dc2/README.md"
+        }
+      ],
+      "focus_ko": "실제 위젯의 상태별 카탈로그",
+      "adaptation_ko": "반복 사용하는 실제 컴포넌트로 결정적인 상태 예제를 만들도록 한다. 별도 시연용 위젯이나 유료 호스팅 서비스를 필수로 도입하지 않는다."
+    }
+  ]
+}

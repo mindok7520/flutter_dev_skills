@@ -1,35 +1,37 @@
-# 입력 방식 지원
+# Keyboard, pointer, and touch input
 
-## 목적과 적용 범위
+Make the same task available through the input methods supported by the product.
 
-터치·마우스·키보드에서 동일한 핵심 기능을 제공한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Expose visible focus and logical traversal; overlays must not conceal the focused control.
+- Use platform-appropriate activation and shortcuts. Do not intercept text editing shortcuts or browser navigation without a task-specific reason.
+- Provide focus restoration when dialogs, menus, or routes close. Avoid keyboard traps.
+- Hover may reveal supplemental information, but essential actions must also be available to touch and keyboard users.
+- Provide alternatives for drag, swipe, and precision gestures where relevant. Prevent accidental duplicate commands without swallowing valid input.
+- Use appropriately sized hit regions and preserve input while the software keyboard appears or disappears.
 
-- 포커스 순서와 시각 표시를 유지한다
-- hover 전용 정보는 키보드·터치 대안을 둔다
-- 단축키는 텍스트 입력과 플랫폼 관습을 침해하지 않는다
+## Procedure
 
-## 실행 절차
+1. List supported inputs and the complete primary interaction sequence.
+2. Test keyboard-only navigation, activation, dismissal, and focus restoration.
+3. Test touch and pointer behavior including overlapping targets, scroll gestures, and disabled states.
+4. Repeat the error path and verify that feedback and recovery remain reachable.
 
-1. Tab·Shift+Tab·Enter·Space·Escape 동작을 정의한다
-2. 스크롤·우클릭·터치 대상과 드래그 대체 동작을 설계한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Each essential action is reachable through the supported input methods.
+- [ ] Focus is visible and restored predictably after transient UI.
+- [ ] Hover-only content does not hide required information.
 
-- [ ] 키보드만으로 모달 진입·이탈·작업 완료가 가능하다
-- [ ] 포커스가 사라지거나 화면 밖에 갇히지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Duplicating every desktop convention on mobile adds clutter. Preserve task equivalence while adapting the interaction to the platform. Avoid global gesture handlers that silently interfere with nested controls.
 
-데스크톱 단축키를 모바일에도 노출하면 혼란스럽다. 실제 입력 기능을 기준으로 점진적으로 제공한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Accessibility](ACCESSIBILITY.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [Flutter adaptive guidance](https://docs.flutter.dev/ui/adaptive-responsive/best-practices).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

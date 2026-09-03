@@ -1,0 +1,4 @@
+interface:
+  display_name: "셰이더 설계·검토"
+  short_description: "효과 목적과 지원 환경을 확인하고 셰이더 대안과 비용을 검증"
+  default_prompt: "$shaders 스킬로 효과 목적을 먼저 확인하고 셰이더 적용을 검토해 주세요."

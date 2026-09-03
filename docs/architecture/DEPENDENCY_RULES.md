@@ -1,35 +1,37 @@
-# 의존성 규칙
+# Dependency direction and boundaries
 
-## 목적과 적용 범위
+Keep implementation choices replaceable and prevent presentation code from becoming the authority for data behavior.
 
-컴파일 의존성과 런타임 수명을 명확히 제한한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Inspect current module relationships before adding abstractions or moving files.
+- Keep data/services independent of Flutter widgets. A repository must not retain BuildContext to display errors.
+- Pass intent and immutable data across boundaries; avoid exposing mutable transport objects directly to unrelated layers.
+- Define interfaces at boundaries with multiple implementations, test seams, or meaningful external coupling. Do not mirror every class with an interface by default.
+- Avoid cyclic imports, cross-feature access to private implementation, and globally mutable service registries.
+- Keep dependency construction and disposal in an identifiable composition scope.
 
-- 모델은 UI·플랫폼 SDK를 의존하지 않는다
-- 서비스 구현은 인터페이스 뒤에서 주입한다
-- 순환 참조·전역 가변 인스턴스·숨은 서비스 조회를 피한다
+## Procedure
 
-## 실행 절차
+1. Trace one user action from view to state owner, repository, and service, then back to rendering.
+2. Identify cycles, implicit globals, concrete external dependencies, and objects retained beyond their owner.
+3. Choose the smallest boundary change that improves the demonstrated problem.
+4. Test the contract with a fake and verify existing production behavior remains intact.
 
-1. import 그래프와 pubspec 의존성을 확인한다
-2. 외부 패키지 경계를 core 또는 해당 기능의 data에 제한한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Dependency direction is visible in imports and construction, not only a diagram.
+- [ ] External effects can be isolated in tests without mocking the entire application.
+- [ ] Resource ownership survives the refactoring.
 
-- [ ] 도메인 테스트가 플랫폼 채널 없이 실행된다
-- [ ] tool/analyze_dependencies.dart의 정책 검사가 통과한다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Interfaces and factories impose maintenance cost. Use them where the boundary has value, and document why a migration is worth changing familiar code.
 
-추상화는 변경 가능한 경계에 둔다. 의미 없는 인터페이스와 재내보내기는 분석을 어렵게 하므로 추가 근거를 남긴다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter architecture recommendations](https://docs.flutter.dev/app-architecture/recommendations), [Compass example](https://github.com/flutter/samples/tree/main/compass_app), and [state management](STATE_MANAGEMENT.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI·UX 설계"
+  short_description: "사용자 질문과 방향 합의를 거쳐 제품에 맞는 화면 설계를 구성"
+  default_prompt: "$ui-design 스킬로 먼저 필요한 내용을 질문하고 UI 설계를 진행해 주세요."

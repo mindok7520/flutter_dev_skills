@@ -1,35 +1,36 @@
-# 위젯 재빌드 개선
+# Targeted rebuild optimization
 
-## 목적과 적용 범위
+Reduce unnecessary UI work without making state updates stale or introducing fragile equality rules.
 
-상태 변화가 필요한 화면 부분만 갱신하도록 한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Measure the slow interaction before assuming a rebuild is expensive. A rebuild is not equivalent to a full repaint.
+- Keep subscriptions close to the values consumed and avoid notifying unrelated large subtrees.
+- Use stable immutable inputs and meaningful equality where practical. A selector that suppresses a required update is a correctness bug.
+- Keep synchronous computation and side effects out of build. Move derived work to an appropriate owner and invalidate it correctly.
+- Use const or extracted reusable widgets when appropriate, but do not claim a speedup without relevant evidence.
 
-- 상태 구독을 필요한 하위 위젯 가까이에 둔다
-- 큰 build 함수에서 파생 계산을 반복하지 않는다
-- 안정적인 항목 키와 적절한 const를 사용한다
+## Procedure
 
-## 실행 절차
+1. Find the state change and measured build/layout cost it produces.
+2. Narrow the dependency or extract the expensive region without changing the state contract.
+3. Test every state field that should update the region and relevant selection/reordering behavior.
+4. Reprofile the same interaction and verify the actual screen.
 
-1. 재빌드 횟수와 실제 프레임 비용을 함께 관찰한다
-2. 상태를 분리하고 중복 알림을 줄인다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Required updates remain visible and one-time effects are not duplicated.
+- [ ] The measured workload improves or the change is justified as maintainability only.
+- [ ] No unnecessary project-wide state-management migration was introduced.
 
-- [ ] 관련 없는 상태 변경이 전체 목록을 갱신하지 않는다
-- [ ] 최적화로 오래된 UI가 남지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Fine-grained subscriptions increase indirection and can retain more objects. Keep them where they solve a real cost or clarify a stable contract.
 
-재빌드 횟수만 낮추는 것은 목표가 아니다. 비교·캐시 비용이 실제 렌더링보다 크면 단순 구현을 유지한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[State management](../architecture/STATE_MANAGEMENT.md) and [Flutter performance guidance](https://docs.flutter.dev/perf/best-practices) and [DevTools](https://docs.flutter.dev/tools/devtools/performance).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

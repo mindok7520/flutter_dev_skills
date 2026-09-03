@@ -1,35 +1,35 @@
-# 테마 설계
+# Theme implementation
 
-## 목적과 적용 범위
+Apply the approved design consistently across components, system settings, and overlays.
 
-시스템과 사용자 설정을 일관된 색·텍스트 체계에 반영한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Inspect the existing theme before adding a new one. Keep semantic roles authoritative and reuse the app's selected design components.
+- Specify system/light/dark behavior and whether a user preference persists. Treat persistence as a product/state decision.
+- Cover dialogs, sheets, menus, disabled controls, selected states, and system UI contrast, not only the main background.
+- Keep fixed brand colors distinct from semantic feedback colors and supply tested variants where needed.
 
-- ThemeData와 ColorScheme을 중앙에서 구성한다
-- 초기 테마는 시스템 설정을 따른다
-- 사용자가 선택한 설정의 영속 여부를 분명히 알린다
+## Procedure
 
-## 실행 절차
+1. Confirm the theme behavior and approved palette with the user.
+2. Map shared roles to components and inspect any theme extensions or legacy overrides.
+3. Switch themes while a form, overlay, and asynchronous operation are active.
+4. Capture the important states and check contrast, focus, icons, and images.
 
-1. 대상 앱의 테마 상태·소유권·초기 설정을 확인한다
-2. 영속 저장 도입 시 시작 지연·마이그레이션을 검토한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Theme changes preserve user state and update every relevant surface.
+- [ ] Color roles remain meaningful and readable across variants.
+- [ ] Persisted settings follow the agreed product requirement.
 
-- [ ] 시스템·라이트·다크 전환이 전체 화면에 적용된다
-- [ ] 재시작 동작이 문서와 일치한다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Avoid maintaining independent color systems in every feature. Theme animation is optional and must not flash unreadable content or ignore reduced motion.
 
-설정 영속화는 제품에서 구현할 기능이다. 구현 전에 설정이 보존된다고 설명하지 않는다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Design tokens](DESIGN_TOKENS.md), [dark mode](DARK_MODE.md), and [Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

@@ -1,35 +1,35 @@
-# 상태 관리
+# State ownership and state-management selection
 
-## 목적과 적용 범위
+Read the target manifest and lockfile before naming APIs or recommending migration. No state-management package is a default dependency of this material repository. Apply the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-상태의 소유권과 변경 경로를 고정한다.
+## Inventory state before choosing a tool
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+For each state value, record its owner, readers, writers, lifetime, persistence needs, source of truth, and asynchronous dependencies. Distinguish transient presentation state (focus, expansion, animation progress), screen/application state (loading, filters, selection), and authoritative domain data (account entitlements, stored records). Derived values should normally be computed from authoritative state rather than maintained as competing writable copies.
 
-## 설계와 규칙
+| Candidate | Appropriate starting point | Costs and checks |
+| --- | --- | --- |
+| Existing solution | It already supports the required behavior and testing | Prefer consistency; change only for a concrete limitation. |
+| Local widget state / ValueNotifier | Small, local, short-lived presentation state | Keep rebuild scope local; dispose owned objects and avoid promoting every flag globally. |
+| ChangeNotifier with explicit dependency injection | Small-to-medium observable view models | Manage listeners and mutation visibility; test transitions and avoid broad notifications. |
+| Riverpod | Scoped dependencies and asynchronous state with explicit lifecycle needs | Verify installed APIs, code-generation choices, provider identity, invalidation, caching, and disposal. |
+| Cubit / Bloc | Explicit state transitions; Bloc is useful when event ordering and transformations matter | Assess event/state boilerplate, equality, selector boundaries, side effects, and concurrency semantics. |
 
-- 기본은 ChangeNotifier와 생성자 주입이다
-- 화면 일시 상태·세션 상태·영속 데이터를 구분한다
-- 로딩·데이터·빈 결과·실패를 명시하고 이전 오류를 무작정 유지하지 않는다
+These are decision criteria, not performance rankings. Compare at most the plausible candidates for the actual application, including keeping the existing solution. Record the reason in an architecture decision before introducing a new project-wide convention.
 
-## 실행 절차
+## Asynchronous behavior
 
-1. 상태 전이와 중복 요청 정책을 먼저 적는다
-2. 리스너 범위를 작게 유지하고 생성한 소유자가 dispose한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+Define initial/loading/data/empty/error/refreshing behavior according to the feature. Retain valid previous data during refresh if the product requires it. A new query or account switch must prevent an older response from overwriting current state. Use cancellation when supported and a request identity or equivalent stale-result check when cancellation alone does not prove ordering.
 
-## 검증과 완료 증거
+For Riverpod, review automatic disposal, invalidation, family parameters, and bounded cache lifetimes against the installed version. Register cleanup with the appropriate lifecycle hook; do not mutate other providers as a cleanup side effect. Disposing a provider is not proof that an external request was cancelled.
 
-- [ ] 동일 입력 반복·실패 후 재시도·dispose 후 완료를 검증한다
-- [ ] 대상 제품의 테마 저장 정책과 실제 동작을 맞춘다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+For Bloc, select event semantics deliberately: concurrent work, sequential processing, ignoring duplicates while busy, or latest-intent replacement serve different products. A transformer on one handler does not automatically serialize every event type. Cancelling an event handler does not undo a remote write; persistent mutations need server-side consistency and idempotency where relevant.
 
-## 실패 대응과 절충
+## Rendering and side effects
 
-복잡한 의존 그래프에는 외부 상태관리의 이점이 있다. 도입은 테스트·이식 비용을 비교한 ADR 이후 수행한다.
+Subscribe only to the state a component needs, with stable equality and immutable snapshots where practical. Measure before adding selectors everywhere. Keep one-time navigation, dialogs, and messages from replaying after rebuild or state restoration. Animation controllers belong to their presentation lifecycle; animation state is not payment or authorization state.
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+## Verification
 
-## 연결 문서와 최신성
+Test the feature's actual state transitions, stale responses, repeated actions, retry, route exit, account switching, and cleanup. Verify behavior rather than the exact number of notifications. When a change claims faster rendering, capture a representative before/after profile; a different package name is not evidence of improvement.
 
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+Use [58-state-management-decision](../../prompts/58-state-management-decision.md), [data flow](DATA_FLOW.md), and [concurrency](../engineering/ASYNC_CONCURRENCY.md). Sources: [Flutter recommendations](https://docs.flutter.dev/app-architecture/recommendations), [Riverpod](https://github.com/rrousselGit/riverpod), [Bloc concurrency](https://github.com/felangel/bloc/tree/master/packages/bloc_concurrency). Checked repository revisions and adaptations: [reference research](../REFERENCE_RESEARCH.md).

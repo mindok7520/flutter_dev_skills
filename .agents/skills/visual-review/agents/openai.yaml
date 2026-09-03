@@ -1,0 +1,4 @@
+interface:
+  display_name: "실행 화면 검수"
+  short_description: "실제 실행 화면과 사용자 흐름을 기준으로 디자인 차이를 검증"
+  default_prompt: "$visual-review 스킬로 실제 화면과 합의된 디자인을 비교해 주세요."

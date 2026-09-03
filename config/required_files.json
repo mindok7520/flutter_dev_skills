@@ -1189,5 +1189,115 @@
       "requested_path": "scripts/verify.ps1",
       "path": "scripts/verify.ps1"
     }
+  ],
+  "extensions": [
+    {
+      "path": ".agents/skills/animation/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/animation/agents/openai.yaml"
+    },
+    {
+      "path": ".agents/skills/shaders/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/shaders/agents/openai.yaml"
+    },
+    {
+      "path": ".agents/skills/state-management/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/state-management/agents/openai.yaml"
+    },
+    {
+      "path": ".agents/skills/ui-design/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/ui-design/agents/openai.yaml"
+    },
+    {
+      "path": ".agents/skills/visual-review/SKILL.md"
+    },
+    {
+      "path": ".agents/skills/visual-review/agents/openai.yaml"
+    },
+    {
+      "path": ".github/prompts/54-design-brief.prompt.md"
+    },
+    {
+      "path": ".github/prompts/55-visual-direction.prompt.md"
+    },
+    {
+      "path": ".github/prompts/56-implement-ui.prompt.md"
+    },
+    {
+      "path": ".github/prompts/57-visual-review.prompt.md"
+    },
+    {
+      "path": ".github/prompts/58-state-management-decision.prompt.md"
+    },
+    {
+      "path": ".github/prompts/59-animation-design.prompt.md"
+    },
+    {
+      "path": ".github/prompts/60-shader-review.prompt.md"
+    },
+    {
+      "path": ".github/prompts/61-component-catalog.prompt.md"
+    },
+    {
+      "path": "config/workflow_catalog.json"
+    },
+    {
+      "path": "docs/REFERENCE_RESEARCH.md"
+    },
+    {
+      "path": "docs/agent/PROMPT_CONTRACT.md"
+    },
+    {
+      "path": "docs/design/DESIGN_WORKFLOW.md"
+    },
+    {
+      "path": "docs/design/PRODUCT_DESIGN_BRIEF.md"
+    },
+    {
+      "path": "docs/design/SCREEN_SPEC_TEMPLATE.md"
+    },
+    {
+      "path": "docs/design/VISUAL_REVIEW.md"
+    },
+    {
+      "path": "docs/performance/SHADER_GUIDE.md"
+    },
+    {
+      "path": "docs/references/repositories.json"
+    },
+    {
+      "path": "prompts/54-design-brief.md"
+    },
+    {
+      "path": "prompts/55-visual-direction.md"
+    },
+    {
+      "path": "prompts/56-implement-ui.md"
+    },
+    {
+      "path": "prompts/57-visual-review.md"
+    },
+    {
+      "path": "prompts/58-state-management-decision.md"
+    },
+    {
+      "path": "prompts/59-animation-design.md"
+    },
+    {
+      "path": "prompts/60-shader-review.md"
+    },
+    {
+      "path": "prompts/61-component-catalog.md"
+    },
+    {
+      "path": "tests/test_catalog.py"
+    }
   ]
 }

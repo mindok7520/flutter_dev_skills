@@ -1,35 +1,35 @@
-# 화면 분기 기준
+# Content-driven layout boundaries
 
-## 목적과 적용 범위
+Define when layout changes are useful and make boundary behavior testable.
 
-레이아웃 변경 기준을 일관되게 적용한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Treat suggested width categories as hypotheses. A 600 or 1024 logical-pixel boundary may be useful, but it is not a universal rule for every component.
+- Record each breakpoint with the content problem it solves, navigation/pane change, and minimum usable region sizes.
+- Use parent constraints for embedded components; a wide app can contain a narrow panel.
+- Consider height, text scale, locale, and input capabilities alongside width.
 
-- 초기 기준은 600 미만 compact·600~1023 medium·1024 이상 expanded다
-- 기준은 기종 분류가 아닌 현재 논리 픽셀 폭이다
-- 최대 콘텐츠 폭은 1120을 기본 제안으로 둔다
+## Procedure
 
-## 실행 절차
+1. Start with the smallest supported usable layout and representative content.
+2. Increase/decrease available space until a meaningful structural change is required.
+3. Test just below, at, and just above each selected boundary, plus an intermediate width and a short viewport.
+4. Check state preservation, focus order, and scroll reachability while crossing boundaries.
 
-1. 대상 앱의 공통 테마 토큰에서 값을 관리한다
-2. 내용이 깨지는 실제 폭을 근거로 제품 기준을 조정한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Every breakpoint is tied to a content or task requirement.
+- [ ] Boundary checks use the product-selected values rather than unrelated fixed constants.
+- [ ] Long translations and enlarged text remain usable near boundaries.
 
-- [ ] 599·600·1023·1024와 창 크기 변경을 검증한다
-- [ ] 텍스트 확대와 세로 공간 부족에서도 스크롤 가능하다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A fixed table is easy to share but can obscure component-level constraints. Use one shared vocabulary while allowing documented local adaptations. Remove obsolete boundaries when a flexible layout solves the problem.
 
-고정 숫자는 보편 표준이 아니다. 번역·표·입력폼의 최소 필요 폭을 확인한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Adaptive behavior](RESPONSIVE_ADAPTIVE.md) and [Flutter guidance](https://docs.flutter.dev/ui/adaptive-responsive/best-practices).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

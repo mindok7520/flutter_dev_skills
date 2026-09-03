@@ -95,18 +95,77 @@ def local_link_errors(path: Path, root: Path) -> list[str]:
     return errors
 
 
+def catalog_errors(data, root: Path) -> list[str]:
+    """Check discovery entries against actual files rather than fixed counts."""
+    if not isinstance(data, dict) or data.get('schema_version') != 1:
+        return ['Invalid workflow catalog schema.']
+    prompts, skills = data.get('prompts'), data.get('skills')
+    if not isinstance(prompts, list) or not prompts or not isinstance(skills, list) or not skills:
+        return ['Workflow catalog requires nonempty prompt and skill lists.']
+    errors = []
+    if any(not isinstance(name, str) or not re.fullmatch(r'[a-z0-9-]{1,64}', name) for name in skills):
+        return ['Invalid workflow catalog skill name.']
+    if len(skills) != len(set(skills)):
+        errors.append('Duplicate workflow catalog skill.')
+    actual_skills = {path.parent.name for path in (root / '.agents/skills').glob('*/SKILL.md')}
+    if set(skills) != actual_skills:
+        errors.append('Workflow catalog skills differ from actual skill files.')
+    paths, ids = [], []
+    for entry in prompts:
+        if not isinstance(entry, dict):
+            errors.append('Invalid workflow catalog prompt entry.')
+            continue
+        identifier, path = entry.get('id'), entry.get('path')
+        if type(identifier) is not int or not 0 <= identifier <= 99:
+            errors.append('Invalid workflow catalog prompt id.')
+            continue
+        ids.append(identifier)
+        if not isinstance(path, str) or not re.fullmatch(r'prompts/[0-9]{2}-[a-z0-9-]+\.md', path):
+            errors.append(f'Invalid workflow catalog prompt path: {path}')
+            continue
+        paths.append(path)
+        if not Path(path).name.startswith(f'{identifier:02d}-'):
+            errors.append(f'Workflow catalog id and filename differ: {path}')
+        if entry.get('language') not in ('en', 'ko'):
+            errors.append(f'Invalid workflow catalog language: {path}')
+        for key in ('title_ko', 'output_ko', 'category'):
+            if not isinstance(entry.get(key), str) or not entry[key].strip():
+                errors.append(f'Missing workflow catalog {key}: {path}')
+        mapped = entry.get('skills')
+        if not isinstance(mapped, list) or any(not isinstance(name, str) or name not in skills for name in mapped):
+            errors.append(f'Unknown workflow catalog skill reference: {path}')
+    if len(paths) != len(set(paths)) or len(ids) != len(set(ids)):
+        errors.append('Duplicate workflow catalog prompt path or id.')
+    if sorted(ids) != list(range(len(prompts))):
+        errors.append('Workflow catalog prompt ids are not contiguous.')
+    actual_prompts = {path.relative_to(root).as_posix() for path in (root / 'prompts').glob('[0-9][0-9]-*.md')}
+    if set(paths) != actual_prompts:
+        errors.append('Workflow catalog prompts differ from actual prompt files.')
+    actual_adapters = {path.name for path in (root / '.github/prompts').glob('*.prompt.md')}
+    expected_adapters = {Path(path).stem + '.prompt.md' for path in actual_prompts}
+    if actual_adapters != expected_adapters:
+        errors.append('Workflow prompt adapters differ from actual prompt files.')
+    return errors
+
+
 def validate(root: Path) -> list[str]:
     root = root.resolve()
     errors = []
     manifest_path = root / 'config' / 'required_files.json'
     try:
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-        for entry in manifest['files']:
-            path = root / entry['path']
-            if not path.is_file():
+        for entry in manifest['files'] + manifest.get('extensions', []):
+            path = (root / entry['path']).resolve()
+            if not path.is_relative_to(root) or not path.is_file():
                 errors.append(f'Missing required file: {entry["path"]}')
     except (OSError, ValueError, KeyError, TypeError) as error:
         errors.append(f'Cannot load required file manifest: {error}')
+
+    try:
+        catalog = json.loads((root / 'config/workflow_catalog.json').read_text(encoding='utf-8'))
+        errors.extend(catalog_errors(catalog, root))
+    except (OSError, ValueError, TypeError) as error:
+        errors.append(f'Cannot load workflow catalog: {error}')
 
     for name in ('pubspec.yaml', 'lib', 'android', 'ios', 'web', 'macos', 'windows', 'linux'):
         if (root / name).exists():
@@ -142,8 +201,6 @@ def validate(root: Path) -> list[str]:
             errors.append(f'{relative}: {error}')
 
     skills = sorted((root / '.agents' / 'skills').glob('*/SKILL.md'))
-    if len(skills) != 24:
-        errors.append(f'Expected 24 skills, found {len(skills)}')
     for path in skills:
         try:
             text = path.read_text(encoding='utf-8')
@@ -163,8 +220,6 @@ def validate(root: Path) -> list[str]:
             errors.append(f'Invalid skill {path.parent.name}: {error}')
 
     prompts = sorted((root / 'prompts').glob('[0-9][0-9]-*.md'))
-    if len(prompts) != 54:
-        errors.append(f'Expected 54 prompts, found {len(prompts)}')
     for index, path in enumerate(prompts):
         if not path.name.startswith(f'{index:02d}-'):
             errors.append(f'Prompt numbering is not contiguous: {path.name}')
@@ -186,7 +241,7 @@ def main() -> int:
             print('ERROR: ' + error, file=sys.stderr)
         print(f'Validation failed: {len(errors)} problem(s).', file=sys.stderr)
         return 1
-    print('Validated required files, links, 54 prompts, 24 skills, YAML, JSON, and workflow policies.')
+    print('Validated required files, links, prompt/skill catalog, YAML, JSON, and workflow policies.')
     return 0
 
 

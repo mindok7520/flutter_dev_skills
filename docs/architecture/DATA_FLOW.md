@@ -1,35 +1,36 @@
-# 데이터 흐름
+# Intent, state transitions, and data flow
 
-## 목적과 적용 범위
+Make user intent and asynchronous responses converge on one coherent visible state.
 
-사용자 입력에서 영속 상태까지 단방향 흐름을 유지한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Name the authoritative source for each datum and keep derived presentation values consistent with it.
+- Separate user intent from confirmed state. Optimistic updates require rollback or reconciliation behavior.
+- Specify loading, refresh, partial data, empty, failure, cancellation, and retry transitions only where they apply.
+- Account for stale responses, pagination overlap, account changes, and out-of-order events.
+- Keep server authorization and persistent transaction decisions outside local UI state.
 
-- 입력 검증→명령→저장소→서비스→상태 갱신 순으로 처리한다
-- 응답 순서가 요청 순서와 같다고 가정하지 않는다
-- 민감 값은 UI 오류와 로그로 전파하지 않는다
+## Procedure
 
-## 실행 절차
+1. Draw the smallest intent-to-service-to-state flow and identify each writer.
+2. Define event ordering and the data retained during pending or failed operations.
+3. Test duplicate, late, cancelled, and conflicting outcomes with controlled fakes.
+4. Verify the actual UI feedback and recovery path against the screen specification.
 
-1. 입력·출력 타입과 실패 타입을 정의한다
-2. 요청 ID 또는 세대 번호로 오래된 응답이 최신 상태를 덮지 못하게 한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] The newest intent cannot be overwritten by an irrelevant older response.
+- [ ] One-time effects are not replayed by a routine rebuild.
+- [ ] Optimistic and persisted state reconcile after failure or reconnect.
 
-- [ ] 늦은 응답·취소·로그아웃 중 완료를 검증한다
-- [ ] 부분 성공을 전체 성공으로 표시하지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Optimistic UI can improve responsiveness but increases reconciliation complexity. Use it only when reversibility and conflict handling fit the operation.
 
-즉시 UI 반영은 반응성을 높이지만 되돌림이 필요하다. 결제·권한은 서버 확정 전 성공으로 표시하지 않는다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter architecture recommendations](https://docs.flutter.dev/app-architecture/recommendations), [Compass example](https://github.com/flutter/samples/tree/main/compass_app), and [state management](STATE_MANAGEMENT.md). [Screen specification](../design/SCREEN_SPEC_TEMPLATE.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

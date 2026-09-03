@@ -1,35 +1,39 @@
-# 애니메이션과 모션
+# Purposeful motion and animation
 
-## 목적과 적용 범위
+Use motion to communicate continuity, feedback, and attention without reducing control, accessibility, or performance.
 
-상태 변화를 설명하는 움직임만 사용한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Ask about purpose and visual constraints before adding new motion. Record its trigger, start/end state, duration/curve roles, and priority.
+- Prefer built-in implicit animation for a simple property transition; use an owned controller for coordinated, reversible, or interruptible timelines.
+- Consider flutter_animate for repeated effect composition and Rive for designer-authored interactive assets only when the project benefits. Compare runtime, asset, platform, and maintenance costs.
+- Respect reduced-motion settings with a stable or simplified equivalent. Required information and success feedback must remain available without animation.
+- Handle interruption, reverse, repeated taps, navigation, app backgrounding, and offscreen widgets. Do not leave perpetual tickers running unnoticed.
+- Assign controller/listener/asset ownership and cleanup explicitly. Do not replay decorative entrances on every state rebuild.
+- Measure layout, paint, raster, compositing, and memory costs. Web CSS compositor advice cannot be mechanically applied to Flutter rendering.
 
-- 초기 전환 길이는 150~250ms 범위에서 검증한다
-- 동작 줄이기 설정을 존중한다
-- 장식용 반복 애니메이션은 배터리와 집중 비용을 검토한다
+## Procedure
 
-## 실행 절차
+1. Confirm the intended user benefit and compare the static alternative.
+2. Specify a timeline and state transitions in the screen specification.
+3. Implement the smallest suitable mechanism using the installed package APIs.
+4. Exercise interruption and reduced motion; inspect frame traces on a representative device in profile mode.
+5. Capture the real result and retain a simpler fallback if the effect cannot meet the agreed constraints.
 
-1. 전환 목적·시작·종료·취소 상태를 정의한다
-2. 컨트롤러 소유권과 앱 백그라운드 동작을 처리한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Motion has a documented purpose and does not delay essential input.
+- [ ] Reduced motion, route exit, backgrounding, and repeated activation behave correctly.
+- [ ] Controllers/resources are cleaned up and the representative workload stays within its measured budget.
 
-- [ ] 중간 취소·화면 이탈·모션 감소 설정에서 안정적이다
-- [ ] 실제 기기 프레임 예산을 지킨다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+More animation increases testing combinations and can compete with reading. A static transition may be the right result. Rive state-machine events must not become the authority for payment or domain state.
 
-복잡한 모션은 저사양에서 느릴 수 있다. 의미가 유지되는 단순 전환 대안을 제공한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Animation SDK guidance](https://docs.flutter.dev/ui/animations), [flutter_animate](https://github.com/gskinner/flutter_animate), [Rive Flutter](https://github.com/rive-app/rive-flutter), and [rendering performance](../performance/RENDERING_PERFORMANCE.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

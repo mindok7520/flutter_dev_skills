@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "prompts": [
+    {
+      "id": 0,
+      "path": "prompts/00-session-bootstrap.md",
+      "title_ko": "세션 시작",
+      "output_ko": "현재 상태·근거·다음 명령·미검증 환경",
+      "language": "en",
+      "category": "workflow",
+      "skills": [
+        "session-bootstrap"
+      ]
+    },
+    {
+      "id": 1,
+      "path": "prompts/01-repository-analysis.md",
+      "title_ko": "저장소 분석",
+      "output_ko": "구조 지도·위험 순위·작업 후보·검증 한계",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 2,
+      "path": "prompts/02-requirements-analysis.md",
+      "title_ko": "요구 분석",
+      "output_ko": "요구 ID·수락 기준·의존성·결정할 사항",
+      "language": "en",
+      "category": "workflow",
+      "skills": []
+    },
+    {
+      "id": 3,
+      "path": "prompts/03-issue-triage.md",
+      "title_ko": "이슈 분류",
+      "output_ko": "분류 근거·우선순위·수락 기준·다음 작업",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 4,
+      "path": "prompts/04-plan-issue.md",
+      "title_ko": "이슈 계획",
+      "output_ko": "계획 파일·단계별 완료 조건·테스트·복구 경로",
+      "language": "en",
+      "category": "workflow",
+      "skills": [
+        "issue-planning"
+      ]
+    },
+    {
+      "id": 5,
+      "path": "prompts/05-architecture-design.md",
+      "title_ko": "아키텍처 설계",
+      "output_ko": "구성도·계약·대안·ADR·검증 계획",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "architecture"
+      ]
+    },
+    {
+      "id": 6,
+      "path": "prompts/06-architecture-review.md",
+      "title_ko": "아키텍처 검토",
+      "output_ko": "근거 경로·영향·수정 순서·절충",
+      "language": "en",
+      "category": "engineering",
+      "skills": []
+    },
+    {
+      "id": 7,
+      "path": "prompts/07-implement-feature.md",
+      "title_ko": "기능 구현",
+      "output_ko": "변경·사용자 동작·검증 결과·남은 위험",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "feature-development",
+        "flutter-development"
+      ]
+    },
+    {
+      "id": 8,
+      "path": "prompts/08-fix-bug.md",
+      "title_ko": "버그 수정",
+      "output_ko": "재현·원인·수정·회귀 증거",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "bug-fix"
+      ]
+    },
+    {
+      "id": 9,
+      "path": "prompts/09-refactor.md",
+      "title_ko": "리팩터링",
+      "output_ko": "전후 구조·동작 보존 증거·전환 비용",
+      "language": "en",
+      "category": "engineering",
+      "skills": []
+    },
+    {
+      "id": 10,
+      "path": "prompts/10-code-review.md",
+      "title_ko": "코드 리뷰",
+      "output_ko": "중요도별 발견·근거·검증 범위",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 11,
+      "path": "prompts/11-security-review.md",
+      "title_ko": "보안 검토",
+      "output_ko": "위험·공격 조건·영향·완화·검증",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 12,
+      "path": "prompts/12-threat-model.md",
+      "title_ko": "위협 모델",
+      "output_ko": "데이터 흐름·위협 표·우선 작업",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 13,
+      "path": "prompts/13-performance-audit.md",
+      "title_ko": "성능 점검",
+      "output_ko": "환경·원본 추적·전후 분포·회귀 위험",
+      "language": "en",
+      "category": "performance",
+      "skills": [
+        "performance"
+      ]
+    },
+    {
+      "id": 14,
+      "path": "prompts/14-memory-audit.md",
+      "title_ko": "메모리 점검",
+      "output_ko": "증가 추세·유지 경로·수정·재측정",
+      "language": "en",
+      "category": "performance",
+      "skills": [
+        "memory"
+      ]
+    },
+    {
+      "id": 15,
+      "path": "prompts/15-rendering-audit.md",
+      "title_ko": "렌더링 점검",
+      "output_ko": "프레임 증거·병목 위치·전후 결과",
+      "language": "en",
+      "category": "performance",
+      "skills": []
+    },
+    {
+      "id": 16,
+      "path": "prompts/16-concurrency-review.md",
+      "title_ko": "동시성 검토",
+      "output_ko": "수명 지도·경합 재현·정책·테스트",
+      "language": "en",
+      "category": "performance",
+      "skills": [
+        "concurrency"
+      ]
+    },
+    {
+      "id": 17,
+      "path": "prompts/17-ui-review.md",
+      "title_ko": "화면 검토",
+      "output_ko": "화면 근거·문제·수정·시각 검증",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    },
+    {
+      "id": 18,
+      "path": "prompts/18-ux-review.md",
+      "title_ko": "사용 경험 검토",
+      "output_ko": "여정·막힘·영향·개선 순서",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    },
+    {
+      "id": 19,
+      "path": "prompts/19-responsive-review.md",
+      "title_ko": "적응형 화면 검토",
+      "output_ko": "플랫폼/폭 표·오버플로·개선·증거",
+      "language": "en",
+      "category": "design",
+      "skills": [
+        "responsive-ui"
+      ]
+    },
+    {
+      "id": 20,
+      "path": "prompts/20-accessibility-review.md",
+      "title_ko": "접근성 검토",
+      "output_ko": "항목별 근거·실패·수정·수동 검증 범위",
+      "language": "en",
+      "category": "design",
+      "skills": [
+        "accessibility"
+      ]
+    },
+    {
+      "id": 21,
+      "path": "prompts/21-web-review.md",
+      "title_ko": "웹 검토",
+      "output_ko": "브라우저 표·배포 조건·문제·대안",
+      "language": "en",
+      "category": "performance",
+      "skills": []
+    },
+    {
+      "id": 22,
+      "path": "prompts/22-wasm-review.md",
+      "title_ko": "Wasm 검토",
+      "output_ko": "버전·지원 표·측정·채택 또는 보류 근거",
+      "language": "en",
+      "category": "performance",
+      "skills": [
+        "web-wasm"
+      ]
+    },
+    {
+      "id": 23,
+      "path": "prompts/23-mobile-platform-review.md",
+      "title_ko": "모바일 검토",
+      "output_ko": "플랫폼별 발견·검증·미지원 환경",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 24,
+      "path": "prompts/24-package-evaluation.md",
+      "title_ko": "패키지 평가",
+      "output_ko": "후보 비교·공식 출처·측정·결정",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "package-evaluation"
+      ]
+    },
+    {
+      "id": 25,
+      "path": "prompts/25-dependency-upgrade.md",
+      "title_ko": "의존성 갱신",
+      "output_ko": "버전 차이·마이그레이션·검증·되돌림",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "dependency-upgrade"
+      ]
+    },
+    {
+      "id": 26,
+      "path": "prompts/26-test-plan.md",
+      "title_ko": "테스트 계획",
+      "output_ko": "요구-테스트 연결·우선순위·환경·제외 근거",
+      "language": "en",
+      "category": "testing",
+      "skills": [
+        "testing"
+      ]
+    },
+    {
+      "id": 27,
+      "path": "prompts/27-generate-tests.md",
+      "title_ko": "테스트 작성",
+      "output_ko": "테스트 파일·보장 계약·결과·한계",
+      "language": "en",
+      "category": "testing",
+      "skills": []
+    },
+    {
+      "id": 28,
+      "path": "prompts/28-integration-test.md",
+      "title_ko": "통합 검증",
+      "output_ko": "기기·명령·결과·미실행 셀",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 29,
+      "path": "prompts/29-e2e-test.md",
+      "title_ko": "전체 흐름 검증",
+      "output_ko": "흐름·각 경계 결과·정리·잔여 위험",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 30,
+      "path": "prompts/30-performance-test.md",
+      "title_ko": "성능 측정",
+      "output_ko": "측정 환경·분포·예산 결과·원본 증거",
+      "language": "en",
+      "category": "performance",
+      "skills": []
+    },
+    {
+      "id": 31,
+      "path": "prompts/31-security-test.md",
+      "title_ko": "보안 검사",
+      "output_ko": "허용 범위·증거·발견·수정·잔여 위험",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 32,
+      "path": "prompts/32-payment-integration.md",
+      "title_ko": "결제 구현",
+      "output_ko": "설계·원장 상태 전이·코드·시험 증거",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 33,
+      "path": "prompts/33-subscription-integration.md",
+      "title_ko": "구독 구현",
+      "output_ko": "상태 표·서버 검증·복구·테스트",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 34,
+      "path": "prompts/34-ad-integration.md",
+      "title_ko": "광고 구현",
+      "output_ko": "배치·동의 흐름·코드·수명 검증",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 35,
+      "path": "prompts/35-privacy-consent.md",
+      "title_ko": "개인정보 동의",
+      "output_ko": "데이터 목록·동의 상태 전이·삭제·증거",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 36,
+      "path": "prompts/36-analytics-instrumentation.md",
+      "title_ko": "분석 계측",
+      "output_ko": "스키마·발화 조건·개인정보 검증·지표",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 37,
+      "path": "prompts/37-error-handling-review.md",
+      "title_ko": "오류 처리 검토",
+      "output_ko": "오류 분류·문제 경로·개선·재현",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 38,
+      "path": "prompts/38-api-contract-review.md",
+      "title_ko": "API 계약 검토",
+      "output_ko": "계약 차이·서버/클라이언트 책임·테스트",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 39,
+      "path": "prompts/39-storage-review.md",
+      "title_ko": "저장소 검토",
+      "output_ko": "데이터 생애주기·위험·수정·복구 증거",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 40,
+      "path": "prompts/40-build-size-audit.md",
+      "title_ko": "빌드 크기 점검",
+      "output_ko": "원본/압축 크기·기여·절감·호환 위험",
+      "language": "en",
+      "category": "performance",
+      "skills": []
+    },
+    {
+      "id": 41,
+      "path": "prompts/41-dead-code-review.md",
+      "title_ko": "미사용 코드 검토",
+      "output_ko": "후보·도달성 근거·삭제 diff·검증",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 42,
+      "path": "prompts/42-localization-review.md",
+      "title_ko": "국제화 검토",
+      "output_ko": "언어별 발견·키 변경·생성·시험 결과",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    },
+    {
+      "id": 43,
+      "path": "prompts/43-observability-review.md",
+      "title_ko": "관측 체계 검토",
+      "output_ko": "관측 공백·경보/대응 연결·증거",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 44,
+      "path": "prompts/44-pr-review.md",
+      "title_ko": "PR 검토",
+      "output_ko": "발견·CI 상태·수락 기준·검증 한계",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 45,
+      "path": "prompts/45-pr-description.md",
+      "title_ko": "PR 설명 작성",
+      "output_ko": "최종 범위에 맞는 제목·본문·검증 기록",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 46,
+      "path": "prompts/46-release-readiness.md",
+      "title_ko": "출시 준비 검토",
+      "output_ko": "준비 표·차단 원인·담당 작업·검증 결과",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 47,
+      "path": "prompts/47-store-readiness.md",
+      "title_ko": "스토어 준비 검토",
+      "output_ko": "스토어별 점검·출처/날짜·미완료",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 48,
+      "path": "prompts/48-release.md",
+      "title_ko": "출시 후보 생성",
+      "output_ko": "SHA·산출물·해시·실행 결과·후속 관측",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 49,
+      "path": "prompts/49-hotfix.md",
+      "title_ko": "긴급 수정",
+      "output_ko": "원인·완화·수정·검증·양쪽 반영 상태",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 50,
+      "path": "prompts/50-rollback.md",
+      "title_ko": "장애 복구",
+      "output_ko": "선택 근거·실행·복구 증거·잔여 위험",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 51,
+      "path": "prompts/51-documentation-sync.md",
+      "title_ko": "문서 동기화",
+      "output_ko": "변경 문서·근거·링크 검사·남은 차이",
+      "language": "en",
+      "category": "workflow",
+      "skills": [
+        "documentation-sync"
+      ]
+    },
+    {
+      "id": 52,
+      "path": "prompts/52-session-handoff.md",
+      "title_ko": "세션 인계",
+      "output_ko": "갱신된 계획·작업 상태·다음 행동",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 53,
+      "path": "prompts/53-project-health-audit.md",
+      "title_ko": "프로젝트 건강 점검",
+      "output_ko": "건강 지표·위험 순위·개선 작업·근거",
+      "language": "ko",
+      "category": "existing",
+      "skills": []
+    },
+    {
+      "id": 54,
+      "path": "prompts/54-design-brief.md",
+      "title_ko": "디자인 요구 정리",
+      "output_ko": "질문·사용자 답변·제품별 디자인 요구·미정 사항",
+      "language": "en",
+      "category": "design",
+      "skills": [
+        "ui-design"
+      ]
+    },
+    {
+      "id": 55,
+      "path": "prompts/55-visual-direction.md",
+      "title_ko": "디자인 방향 비교",
+      "output_ko": "대표 화면의 대안·절충·사용자 선택 근거",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    },
+    {
+      "id": 56,
+      "path": "prompts/56-implement-ui.md",
+      "title_ko": "합의된 UI 구현",
+      "output_ko": "화면·상태·컴포넌트·실행 및 시각 증거",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    },
+    {
+      "id": 57,
+      "path": "prompts/57-visual-review.md",
+      "title_ko": "실행 화면 검수",
+      "output_ko": "실제 캡처·기준별 차이·수정 전후 증거",
+      "language": "en",
+      "category": "design",
+      "skills": [
+        "visual-review"
+      ]
+    },
+    {
+      "id": 58,
+      "path": "prompts/58-state-management-decision.md",
+      "title_ko": "상태관리 선택",
+      "output_ko": "상태 소유권·후보 비교·수명·결정 기록",
+      "language": "en",
+      "category": "engineering",
+      "skills": [
+        "state-management"
+      ]
+    },
+    {
+      "id": 59,
+      "path": "prompts/59-animation-design.md",
+      "title_ko": "애니메이션 설계",
+      "output_ko": "목적·타임라인·중단·모션 감소·성능 증거",
+      "language": "en",
+      "category": "design",
+      "skills": [
+        "animation"
+      ]
+    },
+    {
+      "id": 60,
+      "path": "prompts/60-shader-review.md",
+      "title_ko": "셰이더 설계·검토",
+      "output_ko": "대안·uniform 계약·지원 환경·대체 화면·측정",
+      "language": "en",
+      "category": "performance",
+      "skills": [
+        "shaders"
+      ]
+    },
+    {
+      "id": 61,
+      "path": "prompts/61-component-catalog.md",
+      "title_ko": "컴포넌트 카탈로그",
+      "output_ko": "실제 컴포넌트·상태 예제·접근성·검증",
+      "language": "en",
+      "category": "design",
+      "skills": []
+    }
+  ],
+  "skills": [
+    "accessibility",
+    "advertising",
+    "animation",
+    "architecture",
+    "bug-fix",
+    "code-review",
+    "concurrency",
+    "dependency-upgrade",
+    "documentation-sync",
+    "feature-development",
+    "flutter-development",
+    "incident-response",
+    "issue-planning",
+    "memory",
+    "package-evaluation",
+    "payments",
+    "performance",
+    "privacy",
+    "release",
+    "responsive-ui",
+    "security-review",
+    "session-bootstrap",
+    "session-handoff",
+    "shaders",
+    "state-management",
+    "testing",
+    "ui-design",
+    "visual-review",
+    "web-wasm"
+  ]
+}

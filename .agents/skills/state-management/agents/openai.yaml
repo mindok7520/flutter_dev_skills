@@ -1,0 +1,4 @@
+interface:
+  display_name: "상태관리 선택"
+  short_description: "상태 소유권과 비동기 수명에 근거해 상태관리 대안을 비교"
+  default_prompt: "$state-management 스킬로 현재 프로젝트에 맞는 상태관리 방식을 검토해 주세요."

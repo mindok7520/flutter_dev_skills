@@ -1,35 +1,37 @@
-# 컴포넌트 설계
+# Component contracts and catalogs
 
-## 목적과 적용 범위
+Keep reusable widgets predictable in appearance, behavior, accessibility, and resource lifetime.
 
-재사용 UI의 동작·접근성·수명 계약을 정의한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Specify inputs, callbacks, controlled/local state, variants, and ownership. Avoid network calls and global service lookup inside presentation components.
+- Support the applicable default, hover, focus, pressed, selected, disabled, pending, error, and empty states.
+- Use appropriate built-in controls and semantics before reimplementing gestures. Custom drawing does not automatically provide accessible interaction.
+- Define focus entry/exit, visible focus, keyboard actions, semantic name/role/value, and the hit region.
+- Dispose only resources the component owns; document externally supplied controller ownership and callbacks after unmount.
+- Catalog real components with deterministic content extremes, themes, and text sizes. Avoid a separate demonstration-only implementation.
 
-- 컴포넌트는 필요한 데이터와 콜백만 받는다
-- 내부에서 전역 서비스·결제·네트워크를 조회하지 않는다
-- 외부 전달 컨트롤러의 소유권을 명시한다
+## Procedure
 
-## 실행 절차
+1. Inspect existing equivalents and decide whether reuse, a variant, or a local widget fits.
+2. Write the state and event contract in the screen specification.
+3. Add the component to a local catalog or existing showcase when it is shared or state-rich.
+4. Verify interaction and semantics, then review selected visual baselines.
 
-1. 입력·상태·이벤트·오류 표현을 설계한다
-2. 의미 레이블·키보드·포커스·테스트 키를 포함한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Multiple consumers do not leak selection, pending state, or listeners into each other.
+- [ ] Keyboard and screen-reader behavior match the visible interaction.
+- [ ] Catalog examples and tests use the shipped widget implementation.
 
-- [ ] 재사용 위치마다 상태 누수가 없다
-- [ ] dispose 후 콜백과 이중 해제가 없다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Too many boolean options create invalid combinations. Prefer meaningful variants or separate components when behavior differs substantially. A catalog is optional for a tiny local widget and does not require a hosted service.
 
-과도한 옵션은 API를 불안정하게 만든다. 용도가 다른 컴포넌트는 분리한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md). [Widgetbook](https://github.com/widgetbook/widgetbook).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

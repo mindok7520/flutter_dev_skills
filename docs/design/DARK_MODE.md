@@ -1,35 +1,36 @@
-# 다크 모드
+# Dark mode and contrast
 
-## 목적과 적용 범위
+Preserve hierarchy and readability when the luminance and surface relationships change.
 
-어두운 환경에서도 대비와 의미를 보존한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Design semantic dark roles instead of mechanically inverting every color.
+- Check actual contrast for body text, muted labels, borders, focus, disabled controls, charts, and images.
+- Use surface hierarchy deliberately; shadow alone may not distinguish elevated dark surfaces.
+- Avoid automatic pure-black requirements. Choose surfaces for the product and test on representative devices.
+- Provide non-color cues for states and adjust artwork only when its meaning and rights allow it.
 
-- 밝은 테마 색을 단순 반전하지 않는다
-- 이미지·광고·웹뷰 같은 외부 콘텐츠 경계를 확인한다
-- 오류·선택·비활성·포커스 상태를 별도 점검한다
+## Procedure
 
-## 실행 절차
+1. Confirm supported theme variants and inspect the current semantic palette.
+2. Compare the same realistic content and state in both light and dark themes.
+3. Check transitions, overlays, system bars, and loading placeholders for flashes and poor contrast.
+4. Record approved roles and any asset-specific exceptions.
 
-1. ColorScheme.fromSeed의 밝기별 구성을 사용한다
-2. 제품 색 변경 후 대비와 그림자·구분선을 확인한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Information and interaction priorities are equivalent across themes.
+- [ ] Charts and status labels remain understandable without hue alone.
+- [ ] Theme switching does not expose unreadable transitional states.
 
-- [ ] 큰 글자·고대비·저밝기 기기에서 읽을 수 있다
-- [ ] 테마 전환 때 흰 화면 섬광이 과도하지 않다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A darker palette can change the visual weight of text and images. Review the actual result rather than accepting numeric color inversion. Battery benefits depend on the display and workload; do not promise them without measurement.
 
-순수 검정이 모든 기기에서 최선은 아니다. 브랜드와 가독성·전력 특성을 실제 기기에서 비교한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Theming](THEMING.md), [accessibility](ACCESSIBILITY.md), and [visual review](VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

@@ -1,35 +1,36 @@
-# 메모리 관리
+# Memory retention and resource ownership
 
-## 목적과 적용 범위
+Distinguish live data, caches, transient allocations, and leaks using ownership and repeated measurements.
 
-객체·이미지·네이티브 자원의 수명과 상한을 관리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Record the workload and expected steady state. A single high memory reading is not enough to identify a leak.
+- Inspect Dart heap, native/external allocations, images, and GPU-related resources separately when tools allow.
+- Repeat route entry/exit, scrolling, account switching, and animation start/stop; compare snapshots and retaining paths after comparable idle periods.
+- Bound caches by a meaningful policy and invalidate account-scoped data. Cached decoded images may use far more memory than compressed downloads.
+- Dispose owned controllers, listeners, streams, images, shader instances, and runtime assets using their installed APIs. Garbage collection is not a substitute for deterministic native cleanup.
 
-- Dart GC는 해제되지 않은 참조와 네이티브 자원 수명을 해결하지 않는다
-- 구독·컨트롤러·타이머·포트·이미지 소유자를 정한다
-- 캐시·이벤트 큐·목록에 크기 제한을 둔다
+## Procedure
 
-## 실행 절차
+1. Define what should remain alive at each lifecycle boundary.
+2. Capture baseline and repeated-cycle memory evidence with environment metadata.
+3. Follow retaining paths to the owner and fix the lifetime or cache policy.
+4. Repeat the workload and verify that cleanup does not break active consumers.
 
-1. 같은 화면 진입·이탈을 반복하고 힙 스냅샷을 비교한다
-2. retaining path와 외부 메모리를 함께 조사한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Observed growth is linked to a retained object/resource and its owner.
+- [ ] Repeated operations converge toward an explained steady state or a documented bound.
+- [ ] Account isolation and active shared consumers remain correct.
 
-- [ ] 반복 사용 후 메모리가 안정적인 범위로 돌아온다
-- [ ] 로그아웃 뒤 이전 계정의 대형 객체가 유지되지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Aggressive cache eviction can increase network, decoding, and battery costs. Choose a bounded policy from the workload rather than deleting useful caches indiscriminately.
 
-GC 시점 차이는 누수 증거가 아니다. 동일 조건과 안정화 대기 후 증가 추세·유지 경로를 확인한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[DevTools memory](https://docs.flutter.dev/tools/devtools/memory), [resource lifetime](../architecture/DEPENDENCY_INJECTION.md), and [image assets](IMAGE_ASSET_OPTIMIZATION.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

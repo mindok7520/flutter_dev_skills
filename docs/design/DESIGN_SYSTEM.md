@@ -1,35 +1,39 @@
-# 디자인 시스템
+# Product design system
 
-## 목적과 적용 범위
+Turn an approved visual direction into a small, coherent set of reusable decisions and components.
 
-일관된 구성 요소와 상태 표현으로 사용자 학습 비용을 줄인다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Begin with a product brief and existing UI inventory, not a new dependency or a universal aesthetic preset.
+- Separate semantic design roles from literal values. Define surfaces, content emphasis, actions, feedback, text roles, spacing, shape, elevation, and motion.
+- Reuse existing components before adding variants. A variant represents a user meaning or state, not a one-off workaround.
+- Keep product-wide rules authoritative and document narrow screen overrides with a reason and owner.
+- Keep component behavior, accessibility, focus, state ownership, and error feedback consistent as well as appearance.
+- Choose Material, Cupertino, or a tailored system according to the target product. Do not transplant React/CSS components into Flutter.
+- Maintain representative component states in a local catalog; Widgetbook is an option when its benefits justify a dependency.
 
-- Material 기반 토큰과 컴포넌트를 사용한다
-- 색·간격·타이포그래피·모션을 중앙에서 정의한다
-- 제품 브랜드보다 먼저 접근성과 읽기 순서를 확보한다
+## Procedure
 
-## 실행 절차
+1. Confirm the visual direction and representative screen with the user.
+2. Inventory repeated elements and map them to token roles and component contracts.
+3. Implement the smallest shared set that supports a real screen and its state variants.
+4. Check multiple consumers, themes, locales, text sizes, and input methods before expanding the abstraction.
+5. Record decisions and migration impact; keep examples synchronized with the actual components.
 
-1. 주요 화면의 반복 요소와 상태를 수집한다
-2. 공통 컴포넌트의 API·키보드·오류·로딩 동작을 문서화한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] Each shared role has a purpose, owner, and applicable variants.
+- [ ] The component catalog uses real production components and deterministic fixtures.
+- [ ] A screen can be assembled without inventing unrelated spacing and color values.
 
-- [ ] 기본·눌림·비활성·포커스·오류 상태가 있다
-- [ ] 라이트·다크·큰 글자에서 정보 구조가 유지된다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Centralizing every value creates a difficult API; centralize stable semantics and repeated choices. Keep first-time local components local until a shared contract is clear. Do not claim that a catalog proves accessibility or product usability.
 
-공통 컴포넌트가 모든 예외를 지원하면 복잡해진다. 반복되는 사용자 의미가 같은 요소만 통합한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Design workflow](DESIGN_WORKFLOW.md), [screen specification](SCREEN_SPEC_TEMPLATE.md), and [visual review](VISUAL_REVIEW.md). [shadcn design principles](https://ui.shadcn.com/docs) and [Widgetbook](https://github.com/widgetbook/widgetbook).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

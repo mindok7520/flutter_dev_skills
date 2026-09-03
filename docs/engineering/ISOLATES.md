@@ -1,35 +1,36 @@
-# 격리 실행
+# Isolate decisions and worker lifecycle
 
-## 목적과 적용 범위
+Move demonstrated CPU work away from interactive execution only when the target platform and transfer costs justify it.
 
-CPU 집중 작업을 UI 실행 흐름에서 분리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Measure parsing, transformation, or computation before introducing a worker. Asynchronous I/O alone is not a reason to spawn an isolate.
+- Account for startup, message transfer, copies, result materialization, peak memory, and repeated-job amortization.
+- Define job identity, bounded queues, cancellation, progress, error transport, and shutdown for persistent workers.
+- Do not assume web compute provides parallel execution. Verify the chosen API and target; Flutter documentation describes compute running on the main thread on web.
+- Check plugin/platform limitations and transferable object rules. Isolate separation does not automatically provide a secure sandbox for untrusted work.
 
-- isolate는 별도 메모리 영역에서 메시지로 통신한다
-- 전송·복사·시작 비용이 계산 이득보다 큰지 측정한다
-- 웹에서는 선택한 API의 실행 방식과 지원 여부를 별도 확인한다
+## Procedure
 
-## 실행 절차
+1. Capture the blocking work and its input-size distribution.
+2. Compare in-isolate execution with the smallest supported worker design on the actual platform.
+3. Measure total user-visible latency and memory, including transfer overhead.
+4. Test cancellation, worker failure, queue saturation, and resource cleanup.
 
-1. DevTools로 UI 차단 구간을 찾는다
-2. 작업 수·입력 크기·응답 채널·오류·종료 프로토콜을 정의한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] The worker improves the relevant measured workload rather than only an isolated microbenchmark.
+- [ ] Large messages and cancelled results do not cause unbounded memory retention.
+- [ ] Web and native results are reported separately.
 
-- [ ] 취소·작업자 종료·큰 메시지·연속 요청의 메모리를 측정한다
-- [ ] 네이티브 핸들을 무검증 공유하지 않는다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+A worker can make short tasks slower and large tasks more memory-hungry. Keep the simple implementation if overhead dominates, and optimize the underlying algorithm before adding orchestration.
 
-짧은 작업마다 isolate를 생성하면 느려질 수 있다. 재사용 작업자도 큐 상한과 종료 정책 없이는 메모리 누수 원인이 된다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter isolates](https://docs.flutter.dev/perf/isolates) and [profiling](../performance/PROFILING_GUIDE.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

@@ -1,35 +1,36 @@
-# 이미지와 자산 최적화
+# Image and asset efficiency
 
-## 목적과 적용 범위
+Preserve intended visual quality while controlling transfer, decode, allocation, and repaint costs.
 
-전송 크기와 디코딩 메모리를 따로 관리한다.
+Apply this guidance in the target Flutter app. Inspect its actual SDK, dependencies, and existing implementation first. These are project defaults and decision criteria, not claims that checks have already passed. Follow the [shared contract](../agent/PROMPT_CONTRACT.md).
 
-이 문서는 대상 Flutter 프로젝트에 적용할 기본 정책이다. `lib/`·앱 테스트·Dart 도구 명령은 대상 프로젝트의 경로이며 이 자료 저장소에 앱 구현이 있다는 뜻이 아니다. 제품별 담당자·수치·공급자는 관련 이슈와 실행 계획에 확정한다. 아래 점검 항목은 수행 절차이며 이미 통과했다는 기록이 아니다.
+## Decisions and rules
 
-## 설계와 규칙
+- Measure compressed size, decoded dimensions, cache behavior, and visible display size separately.
+- Request/decode an appropriate resolution for the actual display and pixel density instead of decoding every image at source resolution.
+- Use suitable formats and responsive assets for the target; verify transparency, color, animation, and decoder support rather than assuming one format is always best.
+- Provide meaningful loading and failure presentation. Preserve aspect ratio or layout space to avoid disruptive jumps.
+- Bound prefetching and caches; avoid downloading every asset before the first useful screen.
 
-- 압축 파일 크기는 디코딩 메모리와 다르다
-- 표시 크기와 기기 배율에 맞는 이미지 크기를 선택한다
-- 라이선스와 자산 출처를 기록한다
+## Procedure
 
-## 실행 절차
+1. Inventory dominant assets by transfer and decoded memory cost.
+2. Compare candidate sizes/formats in the actual rendered screen, including high density and dark mode.
+3. Measure load/decode and scroll behavior with representative network and cache states.
+4. Check accessibility descriptions, attribution, and failure states.
 
-1. 화면별 대형 이미지·폰트·아이콘을 분석한다
-2. 서버 리사이즈·썸네일·캐시 상한을 적용한다
-3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
+## Required evidence
 
-## 검증과 완료 증거
+- [ ] The visible result retains the agreed quality at representative sizes.
+- [ ] Memory and network changes are measured separately.
+- [ ] Slow or missing assets do not block the main task unnecessarily.
 
-- [ ] 빠른 스크롤·저메모리·실패 이미지에서 안정적이다
-- [ ] 확대·고배율·다크 모드에서 시각 품질이 유지된다
-- [ ] 문서의 결정과 실제 코드·설정이 일치하며, 미측정·미구현 항목을 명확히 구분했다.
+## Tradeoffs and failure handling
 
-## 실패 대응과 절충
+Compression can damage text, gradients, and fine detail. Inspect the asset in context, and avoid claiming resource savings from file size alone.
 
-과도한 압축은 가독성을 해친다. 큰 이미지의 원본을 모든 카드에 내려받지 않고 필요할 때 요청한다.
+## Sources and related work
 
-실패가 확인되면 통과 조건을 낮추지 말고 최소 재현과 영향 범위를 남긴다. 동작 변경은 관련 테스트와 문서를 함께 수정한다. 여러 세션이 필요하면 [실행 계획](../exec-plans/TEMPLATE.md)에 다음 행동을 구체적으로 적는다.
+[Flutter performance guidance](https://docs.flutter.dev/perf/best-practices) and [DevTools](https://docs.flutter.dev/tools/devtools/performance). [Visual review](../design/VISUAL_REVIEW.md).
 
-## 연결 문서와 최신성
-
-[문서 지도](../README.md)에서 관련 분야를 선택한다. 기술·정책 근거와 확인 날짜는 [출처 목록](../SOURCES.md)에 있다. 별도 표시가 없는 설계 규칙은 이 저장소의 권장 기본값이며 공식 규격의 강제 요구나 제품 출시 보증이 아니다.
+See [reference research](../REFERENCE_RESEARCH.md) for checked dates, repository revisions, and deliberate adaptations. A newer reference does not authorize a dependency upgrade.

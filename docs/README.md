@@ -8,6 +8,15 @@
 
 [공식 출처](SOURCES.md)에서 버전·정책 확인 날짜를 확인한다. 템플릿 예시를 대상 앱의 확정된 설계·지원·성능 수치로 간주하지 않는다.
 
+## 개정한 작업 절차
+
+- [공통 실행 계약](agent/PROMPT_CONTRACT.md): 언어, 사용자 확인, 범위와 완료 증거.
+- [디자인 작업 절차](design/DESIGN_WORKFLOW.md): 질문·응답·방향 합의·구현·검수.
+- [디자인 요구 양식](design/PRODUCT_DESIGN_BRIEF.md), [화면 명세](design/SCREEN_SPEC_TEMPLATE.md), [실제 화면 검수](design/VISUAL_REVIEW.md).
+- [상태관리](architecture/STATE_MANAGEMENT.md), [애니메이션](design/ANIMATION_MOTION.md), [셰이더](performance/SHADER_GUIDE.md).
+- [15개 저장소 조사와 적용 결정](REFERENCE_RESEARCH.md), [확인한 파일과 커밋](references/repositories.json).
+- [작업별 프롬프트와 언어 지도](../prompts/README.md).
+
 ## adr
 
 - [설계 결정 템플릿](adr/ADR_TEMPLATE.md)
