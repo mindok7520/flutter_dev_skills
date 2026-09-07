@@ -1298,6 +1298,18 @@
     },
     {
       "path": "tests/test_catalog.py"
+    },
+    {
+      "path": "scripts/task_context.py"
+    },
+    {
+      "path": "docs/agent/TASK_PACKET.md"
+    },
+    {
+      "path": "tests/test_task_context.py"
+    },
+    {
+      "path": "tests/test_dart_tooling.py"
     }
   ]
 }

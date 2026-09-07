@@ -26,7 +26,7 @@ jobs:
         run: |
           import json, os, re
           from pathlib import Path
-          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          version = json.loads(Path('.fvmrc').read_text(encoding='utf-8-sig'))['flutter']
           if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
               raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
@@ -37,7 +37,13 @@ jobs:
           channel: stable
           cache: true
       - run: dart run tool/bootstrap.dart
-      - run: dart run tool/verify.dart
+      - name: Verify code and the web target when present
+        run: |
+          if [ -d web ]; then
+            dart run tool/verify.dart --platform web
+          else
+            dart run tool/verify.dart
+          fi
   audit:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -51,7 +57,7 @@ jobs:
         run: |
           import json, os, re
           from pathlib import Path
-          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          version = json.loads(Path('.fvmrc').read_text(encoding='utf-8-sig'))['flutter']
           if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
               raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:

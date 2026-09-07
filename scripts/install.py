@@ -56,6 +56,7 @@ def build_plan(
     *,
     with_tooling: bool = False,
     with_ci: bool = False,
+    only_tooling: bool = False,
 ) -> list[CopyEntry]:
     source = source.resolve()
     target = target.resolve(strict=True)
@@ -63,41 +64,47 @@ def build_plan(
         raise ValueError('Source and target must be separate, non-overlapping directories.')
     if not (target / 'pubspec.yaml').is_file():
         raise ValueError('Create the target Flutter project first; pubspec.yaml is required.')
+    with_tooling = with_tooling or only_tooling
     if with_ci and not with_tooling:
         raise ValueError('--with-ci requires --with-tooling.')
-    for relative in ('templates/project/PROJECT.md', 'templates/project/ARCHITECTURE.md'):
-        if not (source / relative).is_file():
-            raise ValueError(f'Required source file is missing: {relative}')
+    if not only_tooling:
+        for relative in ('templates/project/PROJECT.md', 'templates/project/ARCHITECTURE.md'):
+            if not (source / relative).is_file():
+                raise ValueError(f'Required source file is missing: {relative}')
     if with_ci:
         pin = target / '.fvmrc'
         if not pin.is_file():
             raise ValueError('Optional CI requires the target SDK version in .fvmrc. See templates/README.md.')
-        version = json.loads(pin.read_text(encoding='utf-8')).get('flutter')
+        data = json.loads(pin.read_text(encoding='utf-8-sig'))
+        version = data.get('flutter') if isinstance(data, dict) else None
         if not isinstance(version, str) or not re.fullmatch(r'\d+\.\d+\.\d+', version):
             raise ValueError('Optional CI requires an exact stable Flutter version in .fvmrc.')
 
     selected: dict[Path, Path] = {}
-    for name in ('AGENTS.md', 'CLAUDE.md', 'GEMINI.md'):
-        selected[Path(name)] = source / name
-    for directory in ('docs', 'prompts', '.agents', '.cursor'):
-        for path in walk_files(source / directory):
-            relative = path.relative_to(source)
-            if relative.as_posix() == 'docs/FILE_MAP.md':
-                continue
-            if relative.parts[:3] == ('docs', 'exec-plans', 'completed'):
-                if path.name != '.gitkeep':
+    if not only_tooling:
+        for name in ('AGENTS.md', 'CLAUDE.md', 'GEMINI.md'):
+            selected[Path(name)] = source / name
+        for directory in ('docs', 'prompts', '.agents', '.cursor'):
+            for path in walk_files(source / directory):
+                relative = path.relative_to(source)
+                if relative.as_posix() == 'docs/FILE_MAP.md':
                     continue
-            if relative.parts[:3] == ('docs', 'exec-plans', 'active'):
-                if path.name != '.gitkeep':
-                    continue
-            selected[relative] = path
-    for name in ('copilot-instructions.md', 'PULL_REQUEST_TEMPLATE.md'):
-        selected[Path('.github') / name] = source / '.github' / name
-    for directory in ('instructions', 'prompts', 'ISSUE_TEMPLATE'):
-        for path in walk_files(source / '.github' / directory):
-            selected[path.relative_to(source)] = path
-    for path in walk_files(source / 'templates' / 'project'):
-        selected[path.relative_to(source / 'templates' / 'project')] = path
+                if relative.parts[:3] == ('docs', 'exec-plans', 'completed'):
+                    if path.name != '.gitkeep':
+                        continue
+                if relative.parts[:3] == ('docs', 'exec-plans', 'active'):
+                    if path.name != '.gitkeep':
+                        continue
+                selected[relative] = path
+        for name in ('copilot-instructions.md', 'PULL_REQUEST_TEMPLATE.md'):
+            selected[Path('.github') / name] = source / '.github' / name
+        for directory in ('instructions', 'prompts', 'ISSUE_TEMPLATE'):
+            for path in walk_files(source / '.github' / directory):
+                selected[path.relative_to(source)] = path
+        for path in walk_files(source / 'templates' / 'project'):
+            selected[path.relative_to(source / 'templates' / 'project')] = path
+        selected[Path('.agents/task_context.py')] = source / 'scripts/task_context.py'
+        selected[Path('.agents/workflow_catalog.json')] = source / 'config/workflow_catalog.json'
     if with_tooling:
         for directory in ('tool', 'scripts'):
             for path in walk_files(source / 'templates' / 'flutter' / directory):
@@ -154,10 +161,12 @@ def main() -> int:
     parser.add_argument('--apply', action='store_true', help='Copy after all conflicts are checked.')
     parser.add_argument('--with-tooling', action='store_true')
     parser.add_argument('--with-ci', action='store_true')
+    parser.add_argument('--only-tooling', action='store_true', help='Add tooling without comparing customized product documents; combine with --with-ci if needed.')
     parser.add_argument('--list', action='store_true', help='List every planned destination.')
     args = parser.parse_args()
     try:
-        plan = build_plan(SOURCE_ROOT, args.target, with_tooling=args.with_tooling, with_ci=args.with_ci)
+        plan = build_plan(SOURCE_ROOT, args.target, with_tooling=args.with_tooling,
+                          with_ci=args.with_ci, only_tooling=args.only_tooling)
         new_count = sum(not entry.identical for entry in plan)
         print(f'Preflight: {new_count} new files; {len(plan) - new_count} identical files; no conflicts.')
         if args.list:

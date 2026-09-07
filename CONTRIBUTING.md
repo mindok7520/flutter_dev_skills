@@ -9,6 +9,10 @@
 
 "PR"은 Pull Request, 즉 변경을 검토하고 병합하기 위한 요청이다. 기본 브랜치가 `master`이면 `develop` 대상 PR의 `Closes #번호`만으로 이슈가 즉시 닫히지 않을 수 있다. 이슈 종료는 실제 병합·릴리스 정책에 따라 확인한다.
 
+원격 이슈를 사용할 수 없는 로컬 작업은 AGENTS.md의 로컬 ID 절차로 진행하고 PR 제출 전에 실제 이슈에 연결한다. 프롬프트는 분량을 늘리는 대신 입력·번호가 있는 절차·완료 조건과 실제 문서 링크를 유지한다.
+
+Dart 도구 변경은 독립 설치한 Dart SDK를 `DART_EXECUTABLE` 환경 변수로 지정하고 `python -m unittest discover -s tests -p test_dart_tooling.py -v`로 검증한다. 테스트는 실제 Dart 분석·검증기와 명령을 기록하는 Flutter 대역을 사용한다. 실제 Flutter 앱 빌드를 검증한 결과가 아니며, SDK가 없으면 이 검사는 명시적으로 건너뛴다. Flutter에 포함된 Dart는 자체 Flutter를 우선 찾으므로 이 대역 테스트에는 독립 SDK를 사용한다.
+
 커밋은 `feat: add theme selection (#12)`처럼 의도와 이슈를 포함한다. 포맷 변경과 업무 로직 변경을 구분하고, 강제 푸시나 공유 이력 재작성은 협의 없이 하지 않는다. 리뷰에는 변경 이유, 사용자에게 보이는 결과, 테스트 근거, 되돌리는 방법을 적는다.
 
 비밀·개인정보·실거래 데이터는 첨부하지 않는다. 보안 결함은 [SECURITY.md](SECURITY.md)를 따른다. 이 저장소의 권리 정책은 [LICENSE](LICENSE)에 있으며 기여자가 권한을 가진 코드만 포함한다.

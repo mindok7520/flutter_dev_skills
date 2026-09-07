@@ -2,6 +2,8 @@
 
 새 Flutter 프로젝트에 **필요한 파일을 가져다 넣고 개발을 시작하기 위한 자료 저장소**다. 실행 앱이나 제품 예제는 포함하지 않는다. AI 지침, 분야별 문서, 작업 프롬프트 62개, 스킬 29개, 협업 양식과 선택적으로 도입할 설정·CI·개발 도구 템플릿을 제공한다.
 
+**처음에는 기본 설치만 하고 제품 정의를 작성하면 된다.** 전체 문서는 참고용으로 두고 AI에는 현재 작업의 목표·완료 조건과 프롬프트 하나를 전달한다. 이후 필요한 개발 도구를 추가하고, 세션이나 모델이 바뀌면 활성 실행 계획으로 이어간다. 모델별 정확도·비용이나 앱 실행 성능을 보장하는 구성은 아니며, 실제 작업 결과와 측정으로 판단한다.
+
 ## 빠른 시작: 클론부터 첫 AI 작업까지
 
 Python 3.11 이상과 대상 앱에 사용할 Flutter SDK를 준비한다. 명령은 PowerShell·터미널에서 실행할 수 있다. macOS·Linux에서 `python` 명령이 없다면 `python3`로 바꾼다. 이 자료 저장소만 읽거나 수동 복사할 때는 Flutter 설치가 필요하지 않다.
@@ -79,25 +81,92 @@ AI 도구의 작업 폴더를 **my_flutter_app**으로 지정한다. 다음처�
 
 대화가 끊기면 `52-session-handoff`로 남긴 기록과 `00-session-bootstrap` 또는 문맥 복구 지침으로 이어서 작업한다.
 
+아직 원격 저장소나 이슈가 없어도 로컬 개발은 시작할 수 있다. `docs/exec-plans/active/local-YYYYMMDD-slug.md`에 목표·수락 기준을 기록하고 `codex/local-YYYYMMDD-slug` 브랜치를 사용한다. PR 제출 전 실제 이슈 번호와 번호 기반 브랜치로 연결한다. AI가 이슈 번호나 원격 등록 결과를 만들어 기록하지 않도록 한다.
+
 자동 도입 대상은 `AGENTS.md`, 에이전트 어댑터, `docs/`, `prompts/`, `.agents/skills/`, `.cursor/rules/`, GitHub 지침·이슈/PR 양식과 프로젝트 정의 양식이다. 이 저장소의 초기화 이력·README·LICENSE·검증용 Python 코드는 대상 앱에 복사하지 않는다.
+
+작업 입력 생성기만 예외로 `scripts/task_context.py` → `.agents/task_context.py`, `config/workflow_catalog.json` → `.agents/workflow_catalog.json`에 복사한다. Python 표준 라이브러리만 사용하며 앱 실행 의존성이 아니다.
+
+## 어떤 파일을 가져가야 하나
+
+자동 설치를 권장한다. 아래 표는 수동 통합하거나 충돌을 해결할 때 사용하는 **원본 → 대상 앱 위치**다. 같은 이름의 기존 파일이 있으면 필요한 규칙만 병합한다.
+
+| 원본 | 대상 앱 | 역할 |
+| --- | --- | --- |
+| `AGENTS.md` | 루트의 같은 이름 | AI가 읽는 공통 규칙과 문서 지도 |
+| `templates/project/PROJECT.md`, `ARCHITECTURE.md` | 루트의 같은 이름 | 제품 목표·현재 구현·설계·검증 명령 작성 |
+| `templates/project/CONTRIBUTING.md`, `SECURITY.md`, `.github/CODEOWNERS` | 같은 상대 위치 | 제품별 협업·보고·담당자 작성 |
+| `docs/` | `docs/` | 상세 기준·디자인 양식·실행 계획. `FILE_MAP.md`와 원본의 active/completed 작업 이력은 제외하고 빈 계획 폴더는 유지 |
+| `prompts/` | `prompts/` | 작업별 요청문. 현재 작업 하나만 선택해서 읽기 |
+| `.agents/skills/` | `.agents/skills/` | 스킬 지원 도구의 반복 작업 진입점 |
+| `scripts/task_context.py`, `config/workflow_catalog.json` | `.agents/task_context.py`, `.agents/workflow_catalog.json` | 목표·수락 기준·검증을 묶는 선택형 실행 도구 |
+| `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/` | 같은 상대 위치 | 사용 중인 AI 도구의 공통 지침 연결 |
+| `.github/copilot-instructions.md`, `instructions/`, `prompts/`, `ISSUE_TEMPLATE/`, `PULL_REQUEST_TEMPLATE.md` | 각각 `.github/` 아래 같은 위치 | GitHub·Copilot 지침과 협업 양식 |
+| `templates/flutter/tool/`, `scripts/` | `tool/`, `scripts/` | 선택형 Dart 개발 도구와 실행 래퍼 |
+| `templates/flutter/.github/workflows/` | `.github/workflows/` | 선택형 앱 CI. SDK와 지원 플랫폼에 맞춰 확인 |
+
+`pubspec.yaml`, `.fvmrc`, 분석·국제화·테스트 설정은 자동 설치하지 않는다. [템플릿 안내](templates/README.md)를 보고 필요한 항목만 기존 앱 설정에 통합한다. 이 자료 저장소의 루트 `PROJECT.md`·`ARCHITECTURE.md`, `.git/`, 원격 주소, 루트 `.github/workflows/`, `requirements-dev.txt`, `tests/`, 검증 스크립트를 앱에 통째로 복사하지 않는다.
 
 ## 설정·도구·CI는 선택해서 도입
 
 [templates/README.md](templates/README.md)에 파일별 적용 방법이 있다. `templates/flutter/`의 `pubspec.yaml`, 분석·국제화·테스트·SDK 설정은 **대상 프로젝트의 기존 파일에 필요한 항목만 통합**한다. 앱 이름·SDK·의존성을 일괄 교체하지 않는다.
 
-`--with-tooling`은 Dart 개발 도구와 셸 래퍼를, `--with-ci`는 대상 Flutter 앱용 CI를 추가한다. CI는 개발 도구가 필요하므로 두 옵션을 함께 사용한다. 먼저 대상 앱의 `.fvmrc`에 실제로 선택한 정확한 Flutter 버전을 기록한다. 이때도 기존 파일 충돌을 먼저 검사한다.
+최초 설치에서 `--with-tooling`은 Dart 개발 도구와 셸 래퍼를, `--with-ci`는 대상 Flutter 앱용 CI를 추가한다. **기본 설치 후 제품 문서를 작성했다면 `--only-tooling`을 사용한다.** 이 옵션은 제품 문서를 다시 비교하지 않고 도구만 추가한다. CI를 함께 추가하려면 먼저 대상 앱의 `.fvmrc`에 실제로 선택한 정확한 Flutter 버전을 기록한다.
 
 ```sh
-python scripts/install.py --target ../my_flutter_app --with-tooling --with-ci
+python scripts/install.py --target ../my_flutter_app --only-tooling
+python scripts/install.py --target ../my_flutter_app --only-tooling --apply
 ```
 
-위 명령은 자료 원본인 `flutter_dev_skills` 디렉터리에서 실행한다. 빠른 시작을 따라 대상 앱으로 이동했다면 먼저 `cd ../flutter_dev_skills`로 돌아온다. 검토 후 같은 명령에 `--apply`를 추가한다. 앱 코드·플랫폼 파일·광고·결제 SDK를 생성하거나 설치하지 않는다. 서명·운영 배포·GitHub 보호 설정도 자동 변경하지 않는다.
+위 명령은 자료 원본인 `flutter_dev_skills` 디렉터리에서 실행한다. 빠른 시작을 따라 대상 앱으로 이동했다면 먼저 `cd ../flutter_dev_skills`로 돌아온다. CI도 필요하면 두 명령에 `--with-ci`를 추가한다. 도구·CI의 기존 파일 충돌은 계속 검사한다. 앱 코드·플랫폼 파일·광고·결제 SDK를 생성하거나 설치하지 않으며 서명·운영 배포·GitHub 보호 설정도 자동 변경하지 않는다.
+
+도구를 설치한 **대상 앱 루트**에서 실행한다.
+
+```sh
+dart run tool/bootstrap.dart
+dart run tool/verify.dart
+```
+
+기본 검증은 설정·포맷·정적 분석·단위/위젯 테스트다. **플랫폼 빌드는 별도로 선택한다.** 아래 중 실제 지원하는 대상만 실행한다. iOS는 macOS 환경이 필요하고 서명 없는 빌드 결과다.
+
+```sh
+dart run tool/verify.dart --platform android
+dart run tool/verify.dart --platform ios
+dart run tool/verify.dart --platform web
+```
+
+옵션을 반복해 여러 플랫폼을 검사할 수 있다. 앱 CI는 웹 폴더가 있으면 웹 빌드를 포함하고, 네이티브 빌드는 지원 플랫폼의 실행 환경에 별도로 연결한다. 공통 테스트 통과만으로 플랫폼 빌드·기기 검증·출시가 완료되었다고 판단하지 않는다.
 
 ## AI에게 첫 작업 전달하기
 
 대상 프로젝트의 `PROJECT.md`에 제품 목표·플랫폼·데이터·출시 범위를 채운다. `AGENTS.md`와 [세션 시작 프롬프트](prompts/00-session-bootstrap.md)를 읽게 하고 실제 이슈·수락 기준·허용 범위를 전달한다. 대화가 끊기면 Git 상태와 `docs/exec-plans/active/`의 실행 계획으로 재개한다.
 
 도구별 자동 인식 범위는 다를 수 있다. 첫 세션에서 실제로 읽은 지침 경로를 확인하고, 자동 인식하지 않는 도구에는 해당 파일을 직접 제공한다. 프롬프트와 스킬을 모두 한 번에 읽게 하지 않는다.
+
+## 매일 개발하고 다른 모델로 이어가기
+
+1. **하나의 동작을 정한다.** 목표·성공/실패 시 동작·제외 범위·검증을 정하고 관련 프롬프트 하나를 선택한다. 기능 전체를 한 번에 여러 계층으로 나누기보다 저장·실패·복구까지 확인 가능한 작은 흐름으로 진행한다.
+2. **기존 코드와 테스트를 확인한다.** 수정할 파일뿐 아니라 호출자·데이터 소유자·관련 테스트를 읽고 기존 실패를 기록한다. 요구와 무관한 패키지·상태관리·설계 교체를 묶지 않는다.
+3. **작은 변경 후 관련 검증을 실행한다.** 편집 중에는 해당 테스트와 재현 명령, 통합 전에는 프로젝트의 전체 필수 검증을 실행한다. 같은 실패가 두 번 반복되면 동일한 수정을 반복하지 않고 재현을 좁히거나 새로운 근거를 확인한다.
+4. **실측으로 성능을 판단한다.** 대표 기기·데이터량·동일 시나리오·원본 결과로 비교한다. `13-performance-audit`와 `30-performance-test`를 사용하고 [성능 예산](docs/performance/PERFORMANCE_BUDGET.md)을 제품에 맞게 정한다. AI 응답 속도와 앱 실행 속도는 별개다.
+5. **끝나기 전에 인계한다.** `52-session-handoff`로 활성 계획에 완료/남은 작업·승인한 결정·변경 파일·실제 검증·다음 명령을 남긴다. 새 세션이나 다른 모델에서는 `00-session-bootstrap`과 해당 계획을 읽고 현재 Git 상태를 다시 확인한다.
+
+"Task packet"은 AI에게 전달할 목표·완료 조건·파일·검증을 묶은 작업 입력 문서다. 필수 도구는 아니며, 짧은 요청에 이 정보를 직접 써도 된다. 생성기를 사용하려면 대상 앱 루트에서 다음을 실행한다.
+
+```sh
+python .agents/task_context.py --list
+python .agents/task_context.py --task 08 --goal "Fix saved settings recovery" --accept "The saved choice survives restart" --file PROJECT.md --check "flutter test" --constraint "Preserve the approved design" --output task.md
+```
+
+`task.md`와 현재 작업 요청을 AI에게 전달한다. 예시는 요구사항일 뿐 구현·검증 완료 기록이 아니다. `--file`에는 실제 코드·테스트 경로를 반복 지정하고, `--plan`에는 기존 활성 계획 경로를 지정한다. `--output`을 생략하면 콘솔에만 출력하며 기존 파일을 덮어쓰지 않는다. 생성기는 네트워크·AI 호출·명령 실행·코드 내용 수집을 하지 않는다. 파일 접근이 없는 채팅에는 나열된 문서와 필요한 코드 구간을 직접 제공해야 한다.
+
+비용이 낮은 모델에는 명확한 수락 기준과 기존 구현 예시, 좁은 수정 범위가 특히 중요하다는 **운영 가정**을 적용했다. 실제 품질은 같은 시작 커밋·작업·수락 기준으로 완료율·검토에서 발견한 결함·재시도·시간·실제 비용을 비교한다. 권한·결제·파괴적 데이터 변경·복잡한 동시성의 판단이 해결되지 않으면 더 강한 검토를 요청하되 모델을 자동 변경하지 않는다. [작업 입력·모델 비교 계약](docs/agent/TASK_PACKET.md)에 평가 방법을 정리했다.
+
+## 기존 프로젝트의 자료를 갱신하기
+
+설치기는 **자동 업데이트나 병합 도구가 아니다.** 대상에서 수정한 `PROJECT.md`, 지침, 도구와 새 원본이 다르면 기본 설치는 중단한다. `--only-tooling`도 수정된 도구를 덮어쓰지는 않는다.
+
+대상 앱에서 깨끗한 작업 브랜치 또는 복구 가능한 커밋을 준비하고, 도입한 자료의 원본 커밋을 실행 계획에 기록한다. 이후 원본 변경과 대상의 제품별 변경을 비교해 필요한 파일만 병합한다. 갱신 후 실제 앱 검증과 첫 작업의 수락 기준을 확인한다. 새 앱은 현재 자료를 기본 설치하고, 개발 중인 앱은 제품 정의와 기존 결정을 보존한다.
 
 ## 디자인은 사용자 질문부터 시작
 
@@ -148,7 +217,7 @@ AGENTS.md와 PROJECT.md를 읽고 54-design-brief를 적용해 줘.
 
 ## 영어 본문과 한국어 안내
 
-개정한 **프롬프트 34개와 스킬 21개**의 실행 본문은 영어다. 나머지 기존 분야의 한국어 본문은 유지했고 [전체 지도](prompts/README.md)에 프롬프트별 언어를 표시했다. 사용자 질문·판단 설명·최종 답변·README는 한국어이며, 제품 화면의 문구는 제품의 지원 언어를 따른다.
+62개 프롬프트의 영어 실행 본문은 공통 계약을 참조하고 개별 절차·필요한 문서·완료 조건에 집중한다. 스킬과 분야 문서는 기존 한국어와 개정한 영어 본문을 함께 제공한다. [전체 지도](prompts/README.md)에 프롬프트별 목적을 표시했다. 사용자 질문·판단 설명·최종 답변·README는 한국어이며, 제품 화면의 문구는 제품의 지원 언어를 따른다.
 
 영어가 모든 AI 모델에서 더 좋은 결과를 낸다고 검증한 것은 아니다. 기술 용어와 원본 대조를 일관되게 하고 중복 번역으로 생기는 정책 차이를 줄이기 위한 구성이다. 명확한 입력, 사용자와 합의한 범위, 실제 실행 증거를 우선한다.
 
@@ -169,6 +238,8 @@ python -m unittest discover -s tests -v
 ```
 
 검증은 요구 파일 목록·문서 링크·스킬 메타데이터·프롬프트·YAML·CI 고정 버전·복사 충돌 방지를 확인한다. 앱 분석·위젯 테스트·기기 빌드와 실제 배포 검증은 복사한 대상 프로젝트에서 수행한다.
+
+전역 Python 환경과 분리하려면 `python -m venv .venv`로 가상 환경을 만들고 Windows는 `.venv/Scripts/python`, macOS·Linux는 `.venv/bin/python`으로 위 설치·검증 명령을 실행한다. 기본 자료 설치와 작업 입력 생성기에는 `requirements-dev.txt` 설치가 필요하지 않다.
 
 [문서 지도](docs/README.md), [프로젝트 범위](PROJECT.md), [기여 방법](CONTRIBUTING.md), [템플릿 안내](templates/README.md)를 함께 참고한다.
 

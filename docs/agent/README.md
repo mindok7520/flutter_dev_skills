@@ -5,4 +5,6 @@
 3. [작업 실행 규약](TASK_EXECUTION_PROTOCOL.md)으로 구현과 검증을 진행한다.
 4. [인계 규약](HANDOFF_PROTOCOL.md)에 따라 실행 계획을 갱신한다.
 
+모델을 바꾸거나 입력을 더 명확히 해야 하면 [작업 입력 계약](TASK_PACKET.md)으로 목표·수락 기준·파일·검증을 묶는다. 대상 앱의 `python .agents/task_context.py --list`로 작업을 선택할 수 있다. 파일 내용을 일괄 수집하거나 AI를 호출하는 도구는 아니다.
+
 작업 권한은 [자율 실행 범위](AUTONOMY_POLICY.md), 외부 입력은 [AI 보안](AGENT_SECURITY.md), 검증 주장은 [검증 규약](VERIFICATION_PROTOCOL.md)을 따른다. 항상 읽는 지침은 루트 AGENTS.md로 제한하고 필요한 문서·스킬을 선택한다.

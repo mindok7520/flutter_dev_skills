@@ -43,6 +43,10 @@ class CatalogTests(unittest.TestCase):
                 data['prompts'][0][field] = value
                 self.assertTrue(catalog_errors(data, ROOT))
 
+    def test_skill_mapping_cannot_silently_drift_from_entry_points(self):
+        self.catalog['prompts'][32]['skills'] = []
+        self.assertTrue(any('mappings differ' in error for error in catalog_errors(self.catalog, ROOT)))
+
 
 if __name__ == '__main__':
     unittest.main()

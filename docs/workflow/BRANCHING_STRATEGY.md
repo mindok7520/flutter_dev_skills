@@ -14,6 +14,8 @@
 
 ## 실행 절차
 
+For local work without an available remote issue, use a `local-YYYYMMDD-slug` plan and a `codex/local-YYYYMMDD-slug` branch. Record that no remote issue exists; do not invent a number. Continue authorized local investigation, implementation, and checks. Before submitting a PR, obtain or reuse authorization to create/link the real issue and rename the branch to the numbered convention. The PR policy intentionally rejects local identifiers.
+
 1. 최신 develop을 가져와 이슈 번호가 있는 브랜치를 만든다
 2. 기능 PR은 develop·release와 hotfix PR은 master를 대상으로 검토한다
 3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.
