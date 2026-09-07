@@ -43,6 +43,8 @@ python scripts/install.py --target ../my_flutter_app --with-tooling
 python scripts/install.py --target ../my_flutter_app --with-tooling --apply
 ```
 
+위 명령은 최초 자료 설치에 도구를 함께 넣는 경우다. 기본 설치 후 제품 정의를 작성했다면 `--with-tooling` 대신 `--only-tooling`을 사용해 제품 문서와 양식의 차이로 설치가 중단되는 것을 피한다. 기존 도구의 충돌은 계속 검사한다. 원본 갱신은 자동 병합하지 않으며 대상의 제품별 변경과 비교해 통합한다.
+
 복사한 대상 프로젝트에서 실행한다.
 
 ```sh
@@ -54,10 +56,12 @@ dart run tool/analyze_dependencies.dart --outdated --security
 
 - `bootstrap.dart`: 기존 앱의 SDK를 확인하고 의존성을 가져온다. 국제화 설정이 있으면 생성기를 실행한다. 앱 생성·SDK 업그레이드는 하지 않는다. `pub get`은 잠금 파일·생성 메타데이터를 갱신할 수 있으므로 diff를 확인한다.
 - `check.dart`: 앱 루트·지침·잠금 파일·SDK 일치·의존성 override 정책을 확인한다. 문서의 모든 내용이나 보안 취약점의 부재를 보증하지 않는다.
-- `verify.dart`: 실제 존재하는 소스를 포맷 검사하고 정적 분석·단위/위젯 테스트·웹 release 빌드를 실행한다. 이 기본 검증을 채택하려면 대상 앱의 웹 플랫폼과 의미 있는 테스트가 필요하다. 웹을 지원하지 않는 제품은 품질 정책과 도구·CI를 함께 조정한다.
+- `verify.dart`: 실제 소스의 포맷·정적 분석·단위/위젯 테스트를 검사한다. 빌드는 `--platform web`, `--platform android`, `--platform ios` 또는 `linux`, `macos`, `windows`로 명시한다. 옵션을 반복하면 중복 없이 여러 대상을 검사한다. 플랫폼 폴더와 빌드 가능한 호스트를 먼저 확인한다. Android는 release APK, iOS는 서명 없는 release 빌드이며 출시 승인을 뜻하지 않는다. 옵션이 없으면 빌드 미실행을 출력한다.
 - `analyze_dependencies.dart`: 해석된 패키지 목록을 조사한다. `--outdated`는 업데이트 현황, `--security`는 공개 OSV 데이터베이스의 알려진 Pub 취약점을 조회한다. 공급망·라이선스·네이티브 SDK는 별도 검토한다. 내부 레지스트리의 패키지명 공개가 허용되지 않는 프로젝트는 공개 조회를 사용하지 않고 내부 검사를 연결한다.
 
 도구는 추가 Dart 패키지 없이 SDK 표준 라이브러리만 사용한다. 새 도구가 정책을 과도하게 강제한다면 이유·대안·검증을 기록한 뒤 대상 프로젝트에서 조정한다. 단순히 실패를 무시하지 않는다.
+
+편집 중에는 해당 기능의 실제 테스트 경로와 재현 명령을 사용하고, 통합 전 공통 검증과 지원 플랫폼 빌드를 실행한다. 예를 들어 웹 앱은 `dart run tool/verify.dart --platform web`을 사용한다. 공통 검증 성공은 기기별 네이티브 연동·접근성·실측 성능의 성공을 대신하지 않는다.
 
 ## 성능 예산
 
@@ -101,6 +105,8 @@ python scripts/install.py --target ../my_flutter_app --with-tooling --with-ci
 ```
 
 검토 후 `--apply`를 추가한다. 대상의 `.fvmrc`에 정확한 안정 SDK 버전이 있어야 한다. 이미 다른 CI가 있으면 파일을 비교해서 병합한다. source 저장소의 Python 자료 검증 CI는 대상 앱에 복사하지 않는다.
+
+제품 문서를 이미 작성했다면 `python scripts/install.py --target ../my_flutter_app --only-tooling --with-ci`로 도구·CI만 추가한다. 앱 품질·정기 검사 CI는 웹 폴더가 있으면 웹 빌드까지 실행하고 없으면 공통 검사만 실행한다. 네이티브 빌드와 기기 검증은 제품의 지원 플랫폼에 맞는 실행 환경·필수 검사로 연결해야 한다.
 
 앱 CI는 품질·PR 규칙·의존성 점검·정기 점검을 제공한다. Android·iOS·웹 후보는 수동 실행하고 산출물만 보관한다. Android의 실제 서명 설정을 반드시 검토하며 Flutter 기본 생성기의 debug 서명을 그대로 출시용으로 사용하지 않는다. iOS 후보는 코드 서명이 없는 컴파일 결과다.
 

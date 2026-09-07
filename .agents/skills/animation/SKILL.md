@@ -9,7 +9,7 @@ Read [AGENTS.md](../../../AGENTS.md), the current request, and the [shared contr
 
 ## Inputs and scope
 
-Inspect the actual target manifest, dependencies, code, approved decisions, and execution plan. Do not create a Flutter app inside this materials repository. Use the [design workflow](../../../docs/design/DESIGN_WORKFLOW.md) when the work affects UI/UX. Ask the missing user question before a new design, wait for the answer, and reuse an explicit approval already recorded for the same scope.
+Read the goal, acceptance criteria, current plan, actual toolchain, and relevant code. Apply the shared contract for scope, design decisions, safety, and evidence. Load the references below only when needed; the task prompt is an alternative entry point.
 
 ## Required workflow
 
@@ -30,5 +30,3 @@ Inspect the actual target manifest, dependencies, code, approved decisions, and 
 ## Completion contract
 
 Motion purpose and timeline, mechanism decision, lifecycle and reduced-motion behavior, actual visual/performance evidence.
-
-Ground conclusions in actual artifacts and distinguish observed results, assumptions, recommendations, and unavailable environments. Do not claim a screenshot was reviewed when only code or a tool status was inspected. Run meaningful checks for the requested risk, preserve user work, and record decisions and the next action in the relevant plan. Do not introduce unrelated dependencies, external publication, or a larger redesign merely to exercise this skill.

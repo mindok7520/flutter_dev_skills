@@ -15,6 +15,8 @@
 
 ## 실행 절차
 
+Use focused reproduction and affected tests during editing, then run the project's required integration checks before merging. The optional `dart run tool/verify.dart` runs configuration, format, analysis, and unit/widget checks. Add `--platform` for each required build target; the default command does not prove a build passed. A fast feedback check never replaces the product's required platform, security, device, or release evidence.
+
 1. 대상 앱의 검증 명령을 실행한다. 선택형 도구를 도입했고 실제 파일이 있다면 `dart run tool/verify.dart`를 사용한다. 자료 저장소의 문서 변경은 루트 `AGENTS.md`의 Python 검증을 따른다.
 2. PR에 실제 명령·결과·미실행 항목과 위험을 적는다
 3. 변경 이유, 영향 파일, 실행한 명령·환경·결과를 해당 이슈의 실행 계획에 기록한다. 적용하지 않은 항목은 이유와 후속 작업을 남긴다.

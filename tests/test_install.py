@@ -1,6 +1,9 @@
 """Exercise collisions, idempotency, and safe installation boundaries."""
 
 from pathlib import Path
+import os
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -94,6 +97,50 @@ class InstallTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Required source file is missing'):
                 build_plan(SOURCE_ROOT, self.target)
         self.assertFalse((self.target / 'AGENTS.md').exists())
+
+    def test_tooling_can_be_added_after_product_documents_are_customized(self):
+        apply_plan(build_plan(SOURCE_ROOT, self.target), self.target)
+        product = self.target / 'PROJECT.md'
+        product.write_text('The real product definition', encoding='utf-8')
+        plan = build_plan(SOURCE_ROOT, self.target, only_tooling=True)
+        self.assertTrue(all(entry.destination.relative_to(self.target).parts[0] in ('tool', 'scripts') for entry in plan))
+        self.assertGreater(apply_plan(plan, self.target), 0)
+        self.assertEqual(product.read_text(encoding='utf-8'), 'The real product definition')
+        self.assertEqual(apply_plan(build_plan(SOURCE_ROOT, self.target, only_tooling=True), self.target), 0)
+
+    def test_tooling_only_still_rejects_tool_conflicts(self):
+        (self.target / 'tool').mkdir()
+        (self.target / 'tool/verify.dart').write_text('Existing verifier', encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, 'Existing files differ'):
+            build_plan(SOURCE_ROOT, self.target, only_tooling=True)
+
+    def test_ci_pin_rejects_non_object_json_and_accepts_utf8_bom(self):
+        pin = self.target / '.fvmrc'
+        for value in ('[]', 'null', '"3.47.2"'):
+            pin.write_text(value, encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'exact stable Flutter version'):
+                build_plan(SOURCE_ROOT, self.target, only_tooling=True, with_ci=True)
+        pin.write_text('{"flutter": "3.47.2"}', encoding='utf-8-sig')
+        self.assertTrue(build_plan(SOURCE_ROOT, self.target, only_tooling=True, with_ci=True))
+
+    def test_installed_ci_sdk_readers_accept_the_same_bom_as_the_installer(self):
+        from scripts.validate import parse_yaml
+        (self.target / '.fvmrc').write_text('{"flutter": "3.47.2"}', encoding='utf-8-sig')
+        scripts = set()
+        for path in (SOURCE_ROOT / 'templates/flutter/.github/workflows').glob('*.yml'):
+            workflow = parse_yaml(path.read_text(encoding='utf-8'))
+            for job in workflow['jobs'].values():
+                for step in job.get('steps', []):
+                    if step.get('id') == 'sdk':
+                        scripts.add(step['run'])
+        self.assertTrue(scripts)
+        for index, script in enumerate(sorted(scripts)):
+            output = self.target / f'output-{index}.txt'
+            result = subprocess.run([sys.executable, '-I', '-c', script], cwd=self.target,
+                                    env=dict(os.environ, GITHUB_OUTPUT=str(output)),
+                                    capture_output=True, encoding='utf-8', timeout=15)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(output.read_text(encoding='utf-8'), 'version=3.47.2\n')
 
 
 if __name__ == '__main__':

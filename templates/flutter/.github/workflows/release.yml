@@ -32,7 +32,7 @@ jobs:
         run: |
           import json, os, re
           from pathlib import Path
-          version = json.loads(Path('.fvmrc').read_text())['flutter']
+          version = json.loads(Path('.fvmrc').read_text(encoding='utf-8-sig'))['flutter']
           if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
               raise SystemExit('Pin the target Flutter SDK to an exact stable version in .fvmrc.')
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:

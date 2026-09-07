@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -15,6 +16,50 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED = {'.git', '.venv', '__pycache__', '.dart_tool', 'build', '.local', 'artifacts'}
+
+
+def material_files(root: Path):
+    """Prune caches before descent instead of enumerating their entire contents."""
+    def fail(error):
+        raise error
+
+    for directory, directories, files in os.walk(root, topdown=True, onerror=fail, followlinks=False):
+        kept = []
+        for name in sorted(directories):
+            path = Path(directory) / name
+            if name in IGNORED:
+                continue
+            if path.is_symlink():
+                yield path
+            else:
+                kept.append(name)
+        directories[:] = kept
+        for name in sorted(files):
+            yield Path(directory) / name
+
+
+def execution_structure_errors(text: str, name: str, *, skill: bool = False) -> list[str]:
+    """Check discoverable contracts, not a minimum character count."""
+    errors = []
+    headings = re.findall(r'^## (.+)$', text, re.MULTILINE)
+    groups = (
+        ('Inputs and scope', '입력 확인') if skill else ('Inputs', 'Inputs and consultation', '입력과 기준 문서'),
+        ('Required workflow', '작업 순서') if skill else ('Procedure', '실행 절차'),
+        ('Completion contract', '결과 계약') if skill else ('Evidence and completion', '완료와 출력 계약'),
+    )
+    for alternatives in groups:
+        if not any(heading in headings for heading in alternatives):
+            errors.append(f'Missing execution section {alternatives[0]}: {name}')
+    if not re.search(r'^1\. \S', text, re.MULTILINE):
+        errors.append(f'Missing ordered procedure: {name}')
+    if 'AGENTS.md' not in text or 'docs/' not in text:
+        errors.append(f'Missing authoritative references: {name}')
+    for section in re.split(r'^## .+\n', text, flags=re.MULTILINE)[1:]:
+        if not section.strip():
+            errors.append(f'Empty execution section: {name}')
+    if len(text.splitlines()) > (500 if skill else 180):
+        errors.append(f'Execution instructions require splitting: {name}')
+    return errors
 
 
 class UniqueKeyLoader(yaml.BaseLoader):
@@ -108,6 +153,8 @@ def catalog_errors(data, root: Path) -> list[str]:
     if len(skills) != len(set(skills)):
         errors.append('Duplicate workflow catalog skill.')
     actual_skills = {path.parent.name for path in (root / '.agents/skills').glob('*/SKILL.md')}
+    skill_texts = {path.parent.name: path.read_text(encoding='utf-8')
+                  for path in (root / '.agents/skills').glob('*/SKILL.md')}
     if set(skills) != actual_skills:
         errors.append('Workflow catalog skills differ from actual skill files.')
     paths, ids = [], []
@@ -134,6 +181,10 @@ def catalog_errors(data, root: Path) -> list[str]:
         mapped = entry.get('skills')
         if not isinstance(mapped, list) or any(not isinstance(name, str) or name not in skills for name in mapped):
             errors.append(f'Unknown workflow catalog skill reference: {path}')
+        else:
+            linked = {name for name, text in skill_texts.items() if path in text}
+            if set(mapped) != linked or len(mapped) != len(set(mapped)):
+                errors.append(f'Workflow catalog skill mappings differ from skill references: {path}')
     if len(paths) != len(set(paths)) or len(ids) != len(set(ids)):
         errors.append('Duplicate workflow catalog prompt path or id.')
     if sorted(ids) != list(range(len(prompts))):
@@ -174,8 +225,11 @@ def validate(root: Path) -> list[str]:
         if (root / name).exists():
             errors.append(f'Original request file must be removed before completion: {name}')
 
-    for path in sorted(root.rglob('*')):
+    for path in material_files(root):
         relative = path.relative_to(root)
+        if path.is_symlink():
+            errors.append(f'Symbolic links are unsupported in development materials: {relative}')
+            continue
         if any(part in IGNORED for part in relative.parts) or not path.is_file():
             continue
         try:
@@ -209,22 +263,20 @@ def validate(root: Path) -> list[str]:
                 errors.append(f'Skill metadata fields are invalid: {path.parent.name}')
             if metadata['name'] != path.parent.name or not re.fullmatch(r'[a-z0-9-]{1,64}', metadata['name']):
                 errors.append(f'Skill name is invalid: {path.parent.name}')
-            if len(text) < 1200 or len(text.splitlines()) > 500:
-                errors.append(f'Skill detail or size is invalid: {path.parent.name}')
+            errors.extend(execution_structure_errors(text, path.parent.name, skill=True))
             interface = parse_yaml((path.parent / 'agents' / 'openai.yaml').read_text(encoding='utf-8'))['interface']
             if '$' + path.parent.name not in interface['default_prompt']:
                 errors.append(f'Skill invocation missing from default prompt: {path.parent.name}')
             if not 25 <= len(interface['short_description']) <= 64:
                 errors.append(f'Skill short description length is invalid: {path.parent.name}')
-        except (OSError, ValueError, KeyError, IndexError, TypeError) as error:
+        except (OSError, ValueError, KeyError, IndexError, TypeError, yaml.YAMLError) as error:
             errors.append(f'Invalid skill {path.parent.name}: {error}')
 
     prompts = sorted((root / 'prompts').glob('[0-9][0-9]-*.md'))
     for index, path in enumerate(prompts):
         if not path.name.startswith(f'{index:02d}-'):
             errors.append(f'Prompt numbering is not contiguous: {path.name}')
-        if len(path.read_text(encoding='utf-8')) < 1500:
-            errors.append(f'Prompt lacks required detail: {path.name}')
+        errors.extend(execution_structure_errors(path.read_text(encoding='utf-8'), path.name))
         adapter = root / '.github' / 'prompts' / (path.stem + '.prompt.md')
         if not adapter.is_file() or path.name not in adapter.read_text(encoding='utf-8'):
             errors.append(f'Prompt adapter missing or stale: {path.name}')

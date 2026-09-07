@@ -11,6 +11,7 @@
 ## 개정한 작업 절차
 
 - [공통 실행 계약](agent/PROMPT_CONTRACT.md): 언어, 사용자 확인, 범위와 완료 증거.
+- [작업 입력과 모델 인계](agent/TASK_PACKET.md): 목표·수락 기준·파일·검증을 한 작업 단위로 묶고 비용·시간·품질을 비교하는 방법.
 - [디자인 작업 절차](design/DESIGN_WORKFLOW.md): 질문·응답·방향 합의·구현·검수.
 - [디자인 요구 양식](design/PRODUCT_DESIGN_BRIEF.md), [화면 명세](design/SCREEN_SPEC_TEMPLATE.md), [실제 화면 검수](design/VISUAL_REVIEW.md).
 - [상태관리](architecture/STATE_MANAGEMENT.md), [애니메이션](design/ANIMATION_MOTION.md), [셰이더](performance/SHADER_GUIDE.md).

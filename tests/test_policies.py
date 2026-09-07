@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 from scripts.check_pr import validate_pr
-from scripts.validate import local_link_errors, parse_yaml, workflow_errors
+from scripts.validate import execution_structure_errors, local_link_errors, material_files, parse_yaml, workflow_errors
 
 
 class PolicyTests(unittest.TestCase):
@@ -60,6 +60,25 @@ class PolicyTests(unittest.TestCase):
 
     def test_non_mapping_workflows_report_errors_without_crashing(self):
         self.assertTrue(workflow_errors(parse_yaml('- invalid\n'), Path('ci.yml')))
+
+    def test_context_contract_checks_structure_instead_of_padding(self):
+        prompt = ('# Fix a failure\n[AGENTS.md](../AGENTS.md)\n'
+                  '[Contract](../docs/agent/PROMPT_CONTRACT.md)\n'
+                  '## Inputs\nRead the reproduction.\n## Procedure\n1. Reproduce and correct.\n'
+                  '## Evidence and completion\nReport the regression result.\n')
+        self.assertEqual(execution_structure_errors(prompt, 'prompt.md'), [])
+        self.assertTrue(execution_structure_errors(prompt.replace('## Procedure', '## Unrelated'), 'prompt.md'))
+        self.assertTrue(execution_structure_errors('Padding ' * 500, 'prompt.md'))
+
+    def test_material_walk_prunes_generated_directories(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'README.md').touch()
+            (root / '.venv/nested').mkdir(parents=True)
+            (root / '.venv/nested/invalid.md').touch()
+            (root / 'docs').mkdir()
+            (root / 'docs/guide.md').touch()
+            self.assertEqual({path.relative_to(root).as_posix() for path in material_files(root)}, {'README.md', 'docs/guide.md'})
 
 
 if __name__ == '__main__':

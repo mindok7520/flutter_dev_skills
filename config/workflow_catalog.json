@@ -17,7 +17,7 @@
       "path": "prompts/01-repository-analysis.md",
       "title_ko": "저장소 분석",
       "output_ko": "구조 지도·위험 순위·작업 후보·검증 한계",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -35,7 +35,7 @@
       "path": "prompts/03-issue-triage.md",
       "title_ko": "이슈 분류",
       "output_ko": "분류 근거·우선순위·수락 기준·다음 작업",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -107,25 +107,29 @@
       "path": "prompts/10-code-review.md",
       "title_ko": "코드 리뷰",
       "output_ko": "중요도별 발견·근거·검증 범위",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "code-review"
+      ]
     },
     {
       "id": 11,
       "path": "prompts/11-security-review.md",
       "title_ko": "보안 검토",
       "output_ko": "위험·공격 조건·영향·완화·검증",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "security-review"
+      ]
     },
     {
       "id": 12,
       "path": "prompts/12-threat-model.md",
       "title_ko": "위협 모델",
       "output_ko": "데이터 흐름·위협 표·우선 작업",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -236,7 +240,7 @@
       "path": "prompts/23-mobile-platform-review.md",
       "title_ko": "모바일 검토",
       "output_ko": "플랫폼별 발견·검증·미지원 환경",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -287,7 +291,7 @@
       "path": "prompts/28-integration-test.md",
       "title_ko": "통합 검증",
       "output_ko": "기기·명령·결과·미실행 셀",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -296,7 +300,7 @@
       "path": "prompts/29-e2e-test.md",
       "title_ko": "전체 흐름 검증",
       "output_ko": "흐름·각 경계 결과·정리·잔여 위험",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -314,7 +318,7 @@
       "path": "prompts/31-security-test.md",
       "title_ko": "보안 검사",
       "output_ko": "허용 범위·증거·발견·수정·잔여 위험",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -323,16 +327,18 @@
       "path": "prompts/32-payment-integration.md",
       "title_ko": "결제 구현",
       "output_ko": "설계·원장 상태 전이·코드·시험 증거",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "payments"
+      ]
     },
     {
       "id": 33,
       "path": "prompts/33-subscription-integration.md",
       "title_ko": "구독 구현",
       "output_ko": "상태 표·서버 검증·복구·테스트",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -341,25 +347,29 @@
       "path": "prompts/34-ad-integration.md",
       "title_ko": "광고 구현",
       "output_ko": "배치·동의 흐름·코드·수명 검증",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "advertising"
+      ]
     },
     {
       "id": 35,
       "path": "prompts/35-privacy-consent.md",
       "title_ko": "개인정보 동의",
       "output_ko": "데이터 목록·동의 상태 전이·삭제·증거",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "privacy"
+      ]
     },
     {
       "id": 36,
       "path": "prompts/36-analytics-instrumentation.md",
       "title_ko": "분석 계측",
       "output_ko": "스키마·발화 조건·개인정보 검증·지표",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -368,7 +378,7 @@
       "path": "prompts/37-error-handling-review.md",
       "title_ko": "오류 처리 검토",
       "output_ko": "오류 분류·문제 경로·개선·재현",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -377,7 +387,7 @@
       "path": "prompts/38-api-contract-review.md",
       "title_ko": "API 계약 검토",
       "output_ko": "계약 차이·서버/클라이언트 책임·테스트",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -386,7 +396,7 @@
       "path": "prompts/39-storage-review.md",
       "title_ko": "저장소 검토",
       "output_ko": "데이터 생애주기·위험·수정·복구 증거",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -404,7 +414,7 @@
       "path": "prompts/41-dead-code-review.md",
       "title_ko": "미사용 코드 검토",
       "output_ko": "후보·도달성 근거·삭제 diff·검증",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -422,7 +432,7 @@
       "path": "prompts/43-observability-review.md",
       "title_ko": "관측 체계 검토",
       "output_ko": "관측 공백·경보/대응 연결·증거",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -431,7 +441,7 @@
       "path": "prompts/44-pr-review.md",
       "title_ko": "PR 검토",
       "output_ko": "발견·CI 상태·수락 기준·검증 한계",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -440,7 +450,7 @@
       "path": "prompts/45-pr-description.md",
       "title_ko": "PR 설명 작성",
       "output_ko": "최종 범위에 맞는 제목·본문·검증 기록",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -449,7 +459,7 @@
       "path": "prompts/46-release-readiness.md",
       "title_ko": "출시 준비 검토",
       "output_ko": "준비 표·차단 원인·담당 작업·검증 결과",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -458,7 +468,7 @@
       "path": "prompts/47-store-readiness.md",
       "title_ko": "스토어 준비 검토",
       "output_ko": "스토어별 점검·출처/날짜·미완료",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -467,16 +477,18 @@
       "path": "prompts/48-release.md",
       "title_ko": "출시 후보 생성",
       "output_ko": "SHA·산출물·해시·실행 결과·후속 관측",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "release"
+      ]
     },
     {
       "id": 49,
       "path": "prompts/49-hotfix.md",
       "title_ko": "긴급 수정",
       "output_ko": "원인·완화·수정·검증·양쪽 반영 상태",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -485,9 +497,11 @@
       "path": "prompts/50-rollback.md",
       "title_ko": "장애 복구",
       "output_ko": "선택 근거·실행·복구 증거·잔여 위험",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
-      "skills": []
+      "skills": [
+        "incident-response"
+      ]
     },
     {
       "id": 51,
@@ -505,16 +519,18 @@
       "path": "prompts/52-session-handoff.md",
       "title_ko": "세션 인계",
       "output_ko": "갱신된 계획·작업 상태·다음 행동",
-      "language": "ko",
-      "category": "existing",
-      "skills": []
+      "language": "en",
+      "category": "workflow",
+      "skills": [
+        "session-handoff"
+      ]
     },
     {
       "id": 53,
       "path": "prompts/53-project-health-audit.md",
       "title_ko": "프로젝트 건강 점검",
       "output_ko": "건강 지표·위험 순위·개선 작업·근거",
-      "language": "ko",
+      "language": "en",
       "category": "existing",
       "skills": []
     },
@@ -536,7 +552,9 @@
       "output_ko": "대표 화면의 대안·절충·사용자 선택 근거",
       "language": "en",
       "category": "design",
-      "skills": []
+      "skills": [
+        "ui-design"
+      ]
     },
     {
       "id": 56,
@@ -545,7 +563,9 @@
       "output_ko": "화면·상태·컴포넌트·실행 및 시각 증거",
       "language": "en",
       "category": "design",
-      "skills": []
+      "skills": [
+        "ui-design"
+      ]
     },
     {
       "id": 57,
@@ -598,7 +618,9 @@
       "output_ko": "실제 컴포넌트·상태 예제·접근성·검증",
       "language": "en",
       "category": "design",
-      "skills": []
+      "skills": [
+        "ui-design"
+      ]
     }
   ],
   "skills": [
